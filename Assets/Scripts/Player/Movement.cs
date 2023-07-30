@@ -66,6 +66,12 @@ public class Movement : MonoBehaviour{
 
         Vector2 moveDir = new Vector2(xAmt, yAmt).normalized;
         moveDir *= moveAMT * Time.deltaTime;
+        
+        if (player.debuffs[Debuffs.DebuffTypes.Slow])
+        {
+            
+            moveDir *= 0.5f;
+        }
 
         //transform.position += new Vector3(xAmt, yAmt, 0);
         rb.AddForce(moveDir * player.finalStats[Stats.Statstype.MoveSpeed]);

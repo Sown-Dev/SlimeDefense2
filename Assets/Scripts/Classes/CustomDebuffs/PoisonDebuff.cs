@@ -10,7 +10,7 @@
         private float TimeElapsed = 0;
         public override void Tick(Action<float > loseHP,Action<float> gainHP){
             TimeElapsed += Time.deltaTime;
-            if (TimeElapsed >= 2){
+            if (TimeElapsed >= 1){
                 loseHP(5*strength);
                 TimeElapsed = 0;
             }

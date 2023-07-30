@@ -6,7 +6,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable{
+
+public delegate void LevelUp(Player p, UpgradeManager um);
+public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
+{
+
+    public event LevelUp OnLevelUp;
     
     [Header("Debuffs")] public Debuffs debuffs;
     
@@ -117,6 +122,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable{
 
     public void LevelUp(){
         UpgradeManager.um.UpgradeObtain(Convert.ToInt16(finalStats[Stats.Statstype.LevelUpgradeSlots]) );
+        OnLevelUp?.Invoke(this, UpgradeManager.um);
     }
     
     //Health & Damage

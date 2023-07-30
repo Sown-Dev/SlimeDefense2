@@ -63,7 +63,15 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
                     }
                 }
                 tElapsed+= Time.deltaTime;
-                if (tElapsed > DELAY){
+                
+                // #TODO: add strengt multiplier
+                float finalDelay = DELAY;
+                if (debuffs[Debuffs.DebuffTypes.Slow])
+                {
+                    finalDelay *= 2;
+                }
+                
+                if (tElapsed > DELAY ){
                     tElapsed = 0;
                     if (target){
                         Jump();
