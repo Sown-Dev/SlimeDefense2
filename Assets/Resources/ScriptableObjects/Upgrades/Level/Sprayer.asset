@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
+  m_Name: Sprayer
+  m_EditorClassIdentifier: 
+  u:
+    st:
+      stats:
+      - type: 4
+        amount: 1.4
+        operation: 1
+      - type: 1
+        amount: 0.85
+        operation: 1
+      - type: 6
+        amount: 0.9
+        operation: 1
+    Name: Sprayer
+    Description: '<color=green>Attack Speed +40%</color>
+
+      <color=red>Damage
+      -15%
+
+      Ammo Capacity -10%</color>
+
+'
+    Icon: {fileID: 21300000, guid: 95fa305bb74b7a74ca7552e069cdb283, type: 3}
+    HealOnPickup: 0
+  type: Upgrade

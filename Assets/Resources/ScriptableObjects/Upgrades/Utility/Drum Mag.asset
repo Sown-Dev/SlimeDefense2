@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
+  m_Name: Drum Mag
+  m_EditorClassIdentifier: 
+  u:
+    st:
+      stats:
+      - type: 6
+        amount: 1
+        operation: 2
+      - type: 6
+        amount: 1.3
+        operation: 1
+    Name: Drum Mag
+    Description: '<color=green>Ammo Capacity +1
+
+      Ammo Capacity +30%</color>'
+    Icon: {fileID: 21300000, guid: d5212c065b7a677429224af7370b95f6, type: 3}
+    HealOnPickup: 0
+  type: Upgrade

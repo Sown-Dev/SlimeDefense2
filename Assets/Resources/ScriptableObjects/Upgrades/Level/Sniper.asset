@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
+  m_Name: Sniper
+  m_EditorClassIdentifier: 
+  u:
+    st:
+      stats:
+      - type: 1
+        amount: 1.5
+        operation: 1
+      - type: 11
+        amount: 1.3
+        operation: 1
+      - type: 5
+        amount: 0.55
+        operation: 1
+      - type: 15
+        amount: 0.5
+        operation: 1
+      - type: 4
+        amount: 0.7
+        operation: 1
+    Name: Sniper
+    Description: '<color=green>Damage +50%
+
+      Accuracy +100%</color>
+
+      <color=red>Projectiles
+      -45%
+
+      Rate of Fire -30%</color>
+
+'
+    Icon: {fileID: 21300000, guid: ea17c89abb3f43a41999370ef85d6f76, type: 3}
+    debuffs:
+      parent: {fileID: 0}
+      debuffs: []
+    HealOnPickup: 0
+  type: Upgrade

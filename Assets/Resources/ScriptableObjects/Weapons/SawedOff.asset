@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12756f697afb466596b1edeb31deed25, type: 3}
+  m_Name: SawedOff
+  m_EditorClassIdentifier: 
+  w:
+    baseStats:
+      stats:
+      - type: 1
+        amount: 20
+        operation: 2
+      - type: 4
+        amount: 3
+        operation: 2
+      - type: 8
+        amount: 40
+        operation: 2
+      - type: 6
+        amount: 2
+        operation: 2
+      - type: 7
+        amount: 0.8
+        operation: 2
+      - type: 5
+        amount: 7
+        operation: 2
+      - type: 11
+        amount: 1
+        operation: 1
+      - type: 12
+        amount: 0
+        operation: 2
+    Auto: 1
+    Name: Pistol
+    Description: 
+    projectile: {fileID: 0}
+    sprite: {fileID: 21300000, guid: a4ed6c00ed122c543b8fa65004cadb05, type: 3}
