@@ -21,6 +21,7 @@ public class UpgradeManager : MonoBehaviour{
     [Header("CustomUtilityUpgrades")]
     public BiomassUpgrade biomass;
 
+    public TrainingUpgrade training;
     
     public static UpgradeManager um;
     public Player player;
@@ -57,6 +58,7 @@ public class UpgradeManager : MonoBehaviour{
         UtilityUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Utility").Select(x => x.u).ToList();
 
         UtilityUpgradePool.Add(biomass);
+        UtilityUpgradePool.Add(training);
 
         
         MedUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Med Crate").Select(x => x.u).ToList();

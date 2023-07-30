@@ -24,6 +24,8 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
     public int creditCost = 10;
     public float speed = 200;
 
+    public StatusEffect onHitApply;
+
     [HideInInspector] public long id;
 
     void Start(){
@@ -128,6 +130,11 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
             col.rigidbody?.AddForce((col.gameObject.transform.position-transform.position).normalized*
                                     Player.p.finalStats[Stats.Statstype.KnockbackRecieved]*400);
             rb.AddForce((col.gameObject.transform.position-transform.position).normalized* -150f);
+
+            if (col.gameObject.GetComponent<IStatusEffectabble>())
+            {
+                col.gameObject.GetComponent<IStatusEffectabble>().ApplyDebuff(OnHitApply);
+            }
         }
     }
 
