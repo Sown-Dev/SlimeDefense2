@@ -7,6 +7,7 @@ using UnityEngine;
 public class UpgradeSO: ScriptableObject{
     public Upgrade u;
     public string type;
+    public bool Unlocked = true;
 
 
     private void OnValidate(){

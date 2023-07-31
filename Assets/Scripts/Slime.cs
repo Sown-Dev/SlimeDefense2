@@ -24,6 +24,7 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
     public int creditCost = 10;
     public float speed = 200;
     public float goldDrop = 10;
+    public Color color = Color.green;
 
     public StatusEffect onHitApply;
 
@@ -118,8 +119,11 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
 
    
     public void die(){
-        Instantiate(deathParticles,transform.position,transform.rotation);
         Destroy(gameObject);
+        
+        GameObject particles = Instantiate(deathParticles,transform.position,transform.rotation);
+        var m = particles.GetComponent<ParticleSystem>().main;
+        m.startColor = color;
         OnDeath?.Invoke(this);
         if(spawnOnDeath!=null)
             Instantiate(spawnOnDeath,transform.position,transform.rotation);

@@ -11,16 +11,16 @@ public class Explosion : MonoBehaviour{
     public List<Transform> ParticleSystems;
 
     private void Awake(){
+        
+    }
+
+    private void Start(){
+        Destroy(gameObject, 1f);
         float scale = radius;
         foreach (Transform t in ParticleSystems){
             t.localScale = new Vector3(scale, scale,1);
         }
-    }
-
-    private void Start(){
         Explode();
-        Destroy(gameObject, 1f);
-
     }
 
     public void Explode(){

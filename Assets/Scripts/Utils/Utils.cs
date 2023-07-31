@@ -7,6 +7,7 @@ using uRandom = UnityEngine.Random;
 public class Utils : MonoBehaviour{
     public static Utils u;
     public GameObject ExplosionPrefab;
+    public GameObject BuildingDebrisPrefab;
     void Awake(){
         u = this;
     }
@@ -85,4 +86,11 @@ public class Utils : MonoBehaviour{
 
         return RandomPoint;
     }
+
+    public void CreateDebris(Vector2 pos, Color col){
+        GameObject debris = Instantiate(BuildingDebrisPrefab, pos, Quaternion.identity);
+        var main= debris.GetComponent<ParticleSystem>().main;
+        main.startColor = col;
+    }
+    
 }

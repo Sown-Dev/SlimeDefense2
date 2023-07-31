@@ -39,6 +39,7 @@ public class UpgradeManager : MonoBehaviour{
     
     public Queue<List<Upgrade>> UpgradeQueue = new Queue<List<Upgrade>>(); //queue of upgrades to be given to player after 1st
 
+    [HideInInspector] public Dictionary<UpgradePool, List<Upgrade>> Pools = new Dictionary<UpgradePool, List<Upgrade>>();
     private void Awake(){
         um = this;
         //Debug.Log(Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades").Length);
@@ -63,8 +64,21 @@ public class UpgradeManager : MonoBehaviour{
         
         MedUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Med Crate").Select(x => x.u).ToList();
 
+
+        Pools[UpgradePool.Level] = LevelUpgradePool;
+        Pools[UpgradePool.Utility] = UtilityUpgradePool;
+        Pools[UpgradePool.Med] = MedUpgradePool;
         
-        
+        //add pool to upgrade
+        foreach(Upgrade u in LevelUpgradePool){
+            u.Pool = UpgradePool.Level;
+        }
+        foreach(Upgrade u in UtilityUpgradePool){
+            u.Pool = UpgradePool.Utility;
+        }
+        foreach(Upgrade u in MedUpgradePool){
+            u.Pool = UpgradePool.Med;
+        }
     }
     
     //randomly get x upgrades no duplicates
@@ -117,6 +131,14 @@ public class UpgradeManager : MonoBehaviour{
             upgradeUI.Open(UpgradeQueue.Dequeue());
         }
         upgradeViewer.UpdateIcons();
+
+        //removes upgrade from pool and adds its children if it has any
+        Pools[u.Pool].Remove(u);
+        if (u.Children != null){
+            foreach (Upgrade child in u.Children){
+                Pools[u.Pool].Add(child);
+            }
+        }
 
     }
 }
