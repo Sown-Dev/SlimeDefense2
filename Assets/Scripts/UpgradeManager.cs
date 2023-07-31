@@ -44,7 +44,7 @@ public class UpgradeManager : MonoBehaviour{
         um = this;
         //Debug.Log(Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades").Length);
         //allUpgrades = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades").Select(x => x.u).ToList();
-        LevelUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Level").Select(x => x.u).ToList();
+        LevelUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Level").Select(x => x.u).Where(x => x.Base).ToList();
         LevelUpgradePool.Add(exp);
         LevelUpgradePool.Add(pois);
         LevelUpgradePool.Add(killclip);
@@ -56,13 +56,13 @@ public class UpgradeManager : MonoBehaviour{
         LevelUpgradePool.Add(onetap);
         
         
-        UtilityUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Utility").Select(x => x.u).ToList();
+        UtilityUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Utility").Select(x => x.u).Where(x => x.Base).ToList();
 
         UtilityUpgradePool.Add(biomass);
         UtilityUpgradePool.Add(training);
 
         
-        MedUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Med Crate").Select(x => x.u).ToList();
+        MedUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Med Crate").Select(x => x.u).Where(x => x.Base).ToList();
 
 
         Pools[UpgradePool.Level] = LevelUpgradePool;
@@ -135,9 +135,10 @@ public class UpgradeManager : MonoBehaviour{
         //removes upgrade from pool and adds its children if it has any
         Pools[u.Pool].Remove(u);
         if (u.Children != null){
-            foreach (Upgrade child in u.Children){
-                Pools[u.Pool].Add(child);
+            foreach (UpgradeSO child in u.Children){
+                Pools[u.Pool].Add(child.u);
             }
+
         }
 
     }

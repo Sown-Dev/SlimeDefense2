@@ -12,7 +12,7 @@ public class Upgrade{
     public Stats st;
 
     [Header("Children Upgrades:")]
-    public List<Upgrade> Children; //list of upgrades that are unlocked by this upgrade
+    [SerializeReference] public List<UpgradeSO> Children; //list of upgrades that are unlocked by this upgrade
 
     public Sprite Icon;
 
