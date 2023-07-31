@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using Random = System.Random;
+using uRandom = UnityEngine.Random;
 
 public class Utils : MonoBehaviour{
     public static Utils u;
@@ -70,12 +71,16 @@ public class Utils : MonoBehaviour{
         }  
     }
 
-    public static RandomBetweenBounds(Bounds a, Bounds b)
+    public static Vector2 RandomBetweenBounds(Bounds outside, Bounds inside)
     {
-        Vector2 RandomPoint = new Vector2(0, 0); //get random
-        while (!b.contains(RandomPoint))
+        Vector2 RandomPoint = new Vector2(
+            uRandom.Range(outside.min.x, outside.max.x),
+            uRandom.Range(outside.min.y, outside.max.y)); //get random
+        while (inside.Contains(RandomPoint))
         {
-            RandomPoint = new Vector2(0,0) //get random
+            RandomPoint = new Vector2(
+                uRandom.Range(outside.min.x, outside.max.x),
+                uRandom.Range(outside.min.y, outside.max.y)); //get random
         }
 
         return RandomPoint;

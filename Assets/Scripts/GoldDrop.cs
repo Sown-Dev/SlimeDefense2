@@ -1,4 +1,5 @@
-﻿namespace DefaultNamespace;
+﻿
+using UnityEngine;
 
 public class GoldDrop : MonoBehaviour
 {
@@ -7,17 +8,14 @@ public class GoldDrop : MonoBehaviour
     public bool PickedUp;
     public Transform Goto;
 
-    void Start()
-    {
-        Goto = transform.position;
-    }
+
 
     void Update()
     {
         if (PickedUp)
         {
-            transform.position = Mathf.Lerp(transform.position, Goto.position, Time.deltaTime * 10);
-            if (Vector2.distance(transform.position, Goto.position) < 0.5f)
+            transform.position = Vector2.Lerp(transform.position, Goto.position, Time.deltaTime * 10);
+            if (Vector2.Distance(transform.position, Goto.position) < 0.5f)
             {
                 Destroy(gameObject);
             }

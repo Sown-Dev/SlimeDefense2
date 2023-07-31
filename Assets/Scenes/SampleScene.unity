@@ -7213,6 +7213,31 @@ MonoBehaviour:
       debuffs: []
     HealOnPickup: 0
     chance: 0.4
+  training:
+    st:
+      stats: []
+    Name: Training
+    Description: '<color=green>Get +2% Damage each time you level up
+
+      </color>'
+    Icon: {fileID: 21300000, guid: d6909a30f18129647905a6a2b47608ff, type: 3}
+    debuffs:
+      parent: {fileID: 0}
+      debuffs: []
+    HealOnPickup: 0
+    toGive:
+      st:
+        stats:
+        - type: 1
+          amount: 1.02
+          operation: 1
+      Name: Proficiency
+      Description: +2% Damage
+      Icon: {fileID: 21300000, guid: 0e4705589e508b642b186d100412fc83, type: 3}
+      debuffs:
+        parent: {fileID: 0}
+        debuffs: []
+      HealOnPickup: 0
   player: {fileID: 362014036}
   upgradeViewer: {fileID: 140904516}
   upgradeUI: {fileID: 2098285868}

@@ -11,7 +11,7 @@ public delegate void LevelUp(Player p, UpgradeManager um);
 public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
 {
 
-    public event LevelUp OnLevelUp;
+    public static event LevelUp OnLevelUp;
     
     [Header("Debuffs")] public Debuffs debuffs;
     
@@ -70,6 +70,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         UpdateHPUI();
         
         weaponIcon.sprite = Weapon.sprite;
+        UpdateGoldTxt();
     }
 
 
@@ -179,5 +180,38 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
 
     public void ApplyStatusEffect(StatusEffect statusEffect){
         debuffs.AddDebuff(statusEffect);
+    }
+    
+    //Gold & etc.
+
+    [Header("Gold")]
+    public float goldAmount;
+    public TMP_Text goldTxt;
+
+    public void AddGold(float amt){
+        goldAmount += amt * finalStats[Stats.Statstype.GoldMultiplier];
+        UpdateGoldTxt();
+    }
+
+    public bool SpendGold(float amt){
+        if(goldAmount>=amt){
+            RemoveGold(amt);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void RemoveGold(float amt){
+        goldAmount -= amt;
+        if (goldAmount < 0){
+            goldAmount = 0;
+        }
+        UpdateGoldTxt();
+    }
+
+    public void UpdateGoldTxt(){
+        goldTxt.text = String.Format(Convert.ToInt32(goldAmount).ToString(), $"{1234:n0}");
     }
 }

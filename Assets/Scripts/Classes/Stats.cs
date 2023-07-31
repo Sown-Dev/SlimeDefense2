@@ -42,6 +42,7 @@ public class Stats : ICloneable{
         FOV=19,
         Recoil=20,
         KnockbackRecieved=21,
+        GoldMultiplier=22,
     }
 
     public enum StatsOperation{

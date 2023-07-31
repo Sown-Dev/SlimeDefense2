@@ -23,6 +23,7 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
     public float XPGain = 10f;
     public int creditCost = 10;
     public float speed = 200;
+    public float goldDrop = 10;
 
     public StatusEffect onHitApply;
 
@@ -122,6 +123,8 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
         OnDeath?.Invoke(this);
         if(spawnOnDeath!=null)
             Instantiate(spawnOnDeath,transform.position,transform.rotation);
+        
+        GoldManager.gm.SpawnGold(transform.position, goldDrop);
     }
 
     private void OnCollisionEnter2D(Collision2D col){
@@ -131,9 +134,9 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
                                     Player.p.finalStats[Stats.Statstype.KnockbackRecieved]*400);
             rb.AddForce((col.gameObject.transform.position-transform.position).normalized* -150f);
 
-            if (col.gameObject.GetComponent<IStatusEffectabble>())
+            if (col.gameObject.GetComponent<IStatusEffectable>() !=null && onHitApply != null)  
             {
-                col.gameObject.GetComponent<IStatusEffectabble>().ApplyDebuff(OnHitApply);
+                col.gameObject.GetComponent<IStatusEffectable>().ApplyStatusEffect(onHitApply);
             }
         }
     }

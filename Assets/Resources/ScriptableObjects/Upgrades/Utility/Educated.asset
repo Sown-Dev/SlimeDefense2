@@ -16,9 +16,13 @@ MonoBehaviour:
     st:
       stats:
       - type: 9
-        amount: 1.25
+        amount: 1.2
         operation: 1
     Name: Educated
-    Description: <color=green>XP Gain +25%</color>
+    Description: <color=green>XP Gain +20%</color>
     Icon: {fileID: 21300000, guid: 2aa1d963ddf6f1449bfd47d85228fb52, type: 3}
+    debuffs:
+      parent: {fileID: 0}
+      debuffs: []
+    HealOnPickup: 0
   type: Upgrade

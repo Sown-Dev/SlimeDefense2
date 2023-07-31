@@ -163,10 +163,10 @@ public class GameManager : MonoBehaviour{
         
         //new
 
-        Bounds inside = new Bounds(8, 8);
-        Bounds.position *= player.rb.velocity.normalized;
+        Bounds inside = new Bounds(player.rb.velocity.normalized*-2, new Vector3(8,8,1));
+        Gizmos.DrawWireCube(inside.center, inside.size);
         
-        Vector3 rand = Utils.RandomBetweenBounds(new Bounds(12,12), new Bounds(8,8))
+        Vector3 rand = Utils.RandomBetweenBounds(new Bounds(Vector3.zero, new Vector3(12, 12, 1)), inside);
 
         Vector3 spawnPos = Origin + rand;
         SpawnSlime(spawnPos, slime, Slime.SlimeState.Aggressive);
