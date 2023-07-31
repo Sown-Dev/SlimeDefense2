@@ -8,12 +8,12 @@
         }
 
         private float TimeElapsed = 0;
-        public override void Tick(Action<float > loseHP,Action<float> gainHP){
+        public override void Tick(IDamagable hp, IStatusEffectable st){
             TimeElapsed += Time.deltaTime;
             if (TimeElapsed >= 1){
-                loseHP(5*strength);
+                hp.TakeDamage(5*strength);
                 TimeElapsed = 0;
             }
-            base.Tick(loseHP, gainHP);
+            base.Tick(hp, st);
         }
     }

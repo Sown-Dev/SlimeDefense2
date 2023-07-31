@@ -29,7 +29,10 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     public Character character;
     public Stats finalStats;
     public Rigidbody2D rb;
-    public float Health;
+
+    public float Health{ get; set; }
+    public float maxHealth{ get; set; }
+
 
     [Header("Utils")] public LayerMask Enemies;
     public CinemachineVirtualCamera cmvc;
@@ -77,7 +80,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     private float RegenElapsed = 0;
     private int prevDebuffCount = 0;
     void Update(){
-        debuffs.Tick(TakeDamage,Heal);
+        debuffs.Tick(this,this);
 
         if (debuffs.debuffs.Count != prevDebuffCount){
             CalculateStats();
@@ -160,6 +163,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     }
 
     public void UpdateHPUI(){
+        maxHealth = finalStats[Stats.Statstype.MaxHealth];
         hpBar.fillAmount = Health / finalStats[Stats.Statstype.MaxHealth];
         hpText.text = Convert.ToInt32(Health) + "/" + Convert.ToInt32(finalStats[Stats.Statstype.MaxHealth]);
     }
@@ -176,6 +180,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         }
         UpdateHPUI();
     }
+
 
 
     public void ApplyStatusEffect(StatusEffect statusEffect){

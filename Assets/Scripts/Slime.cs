@@ -17,9 +17,8 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
     public Animator am;
     public SlimeState State;
     
-    [Header("Stats")]
-    public float maxHealth;
-    public float health;
+    [field: SerializeField] public float maxHealth{ get; set; }
+    public float Health{ get; set; }
     public float XPGain = 10f;
     public int creditCost = 10;
     public float speed = 200;
@@ -34,7 +33,7 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
         debuffs = new Debuffs(transform);
         tElapsed =Random.Range(0,DELAY);
         rb = gameObject.GetComponent<Rigidbody2D>();
-        health = maxHealth;
+        Health = maxHealth;
         target = GameObject.FindGameObjectWithTag("Player").transform;
         am.SetTrigger("Spawn");
     }
@@ -42,7 +41,7 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
     public float DELAY = 0.9f;
     public float tElapsed = 0;
     private void Update(){
-        debuffs.Tick(TakeDamage,Heal);
+        debuffs.Tick(this,this);
         switch (State){
             //both states have the recycling code but passive slimes recycle at a lower threshold
             case SlimeState.Passive:{
@@ -104,16 +103,16 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
             State = SlimeState.Aggressive;
         
         am.SetTrigger("Hit");
-        health -= dmg;
-        if (health <= 0){
+        Health -= dmg;
+        if (Health <= 0){
             die();
         }
     }
 
     public void Heal(float amt){
-        health += amt;
-        if (health > maxHealth){
-            health = maxHealth;
+        Health += amt;
+        if (Health > maxHealth){
+            Health = maxHealth;
         }
     }
 

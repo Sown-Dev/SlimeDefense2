@@ -3,8 +3,8 @@
     using UnityEngine;
 
     public class DestructibleTerrain: MonoBehaviour, IFriendlyDamagable{
-        public float maxHealth = 100;
-        private float health;
+        [field: SerializeField] public float maxHealth{ get; set; }
+        public float Health{ get; set; }
         
         public SpriteRenderer hitsr;
         private SpriteRenderer mysr;
@@ -13,22 +13,22 @@
             mysr = gameObject.GetComponent<SpriteRenderer>();
             hitsr.sprite = mysr.sprite;
             hitsr.color = Color.clear;
-            health = maxHealth;
+            Health = maxHealth;
         }
 
 
         public void TakeDamage(float dmg){
-            health -= dmg;
+            Health -= dmg;
             StartCoroutine(FlashWhite());
-            if (health <= 0){
+            if (Health <= 0){
                 Destroy(gameObject);
             }
         }
 
         public void Heal(float amt){
-            health += amt;
-            if (health > maxHealth){
-                health = maxHealth;
+            Health += amt;
+            if (Health > maxHealth){
+                Health = maxHealth;
             }
         }
 

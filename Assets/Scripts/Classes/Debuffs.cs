@@ -22,10 +22,10 @@ public class Debuffs{
         parent = p;
     }
     
-    public void Tick(Action<float> loseHP, Action<float> gainHP){
+    public void Tick(IDamagable hp, IStatusEffectable st){
         foreach (StatusEffect se in debuffs.ToList()){
             se.duration -= Time.deltaTime;
-            se.Tick(loseHP,gainHP);
+            se.Tick(hp, st);
             if(se.duration<=0){
                 se.Remove();
                 debuffs.Remove(se);

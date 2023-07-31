@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class StatusEffect{
     public Debuffs.DebuffTypes type;
+    public Sprite icon;
     public GameObject particlePrefab; //actual prefab
     [HideInInspector]public GameObject particles; //reference
     public float duration;
@@ -34,7 +35,7 @@ public class StatusEffect{
     }
 
     private float tickElapsed;
-    public virtual void Tick(Action<float> loseHP,Action<float> gainHP){
+    public virtual void Tick(IDamagable hp, IStatusEffectable st){
         //reducing duration is done in debuffs
         if (duration > maxTime){
             duration = maxTime;
@@ -46,10 +47,10 @@ public class StatusEffect{
                 tickElapsed = 0;
 
                 if (hpPerSec > 0){
-                    gainHP(hpPerSec*strength);
+                    hp.Heal(hpPerSec*strength);
                 }
                 else{
-                    loseHP(-hpPerSec *strength);
+                    hp.TakeDamage(-hpPerSec *strength);
                 }
 
             }
