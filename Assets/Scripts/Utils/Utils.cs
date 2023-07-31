@@ -69,4 +69,15 @@ public class Utils : MonoBehaviour{
             list[n] = value;  
         }  
     }
+
+    public static RandomBetweenBounds(Bounds a, Bounds b)
+    {
+        Vector2 RandomPoint = new Vector2(0, 0); //get random
+        while (!b.contains(RandomPoint))
+        {
+            RandomPoint = new Vector2(0,0) //get random
+        }
+
+        return RandomPoint;
+    }
 }

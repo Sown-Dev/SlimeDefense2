@@ -154,9 +154,20 @@ public class GameManager : MonoBehaviour{
 
     public void SpawnSlime(GameObject slime){
         Vector3 Origin = player.transform.position;
+        
+        //Old random code
+        /*
         Vector3 rand = new Vector3(Random.Range(8, 11), Random.Range(8, 11), 0);
         rand.x *= Random.Range(-1, 1) == 0 ? 1 : -1; //randomly invert x and y
-        rand.y *= Random.Range(-1, 1) == 0 ? 1 : -1;
+        rand.y *= Random.Range(-1, 1) == 0 ? 1 : -1;   */
+        
+        //new
+
+        Bounds inside = new Bounds(8, 8);
+        Bounds.position *= player.rb.velocity.normalized;
+        
+        Vector3 rand = Utils.RandomBetweenBounds(new Bounds(12,12), new Bounds(8,8))
+
         Vector3 spawnPos = Origin + rand;
         SpawnSlime(spawnPos, slime, Slime.SlimeState.Aggressive);
     }

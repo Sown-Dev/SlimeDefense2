@@ -12,8 +12,12 @@ public class BiomassUpgrade : Upgrade{
     }
 
     public void AddAmmo(Slime s){
-        if(Utils.Random(chance))
-            Player.p.s.currentAmmo++;
+        if (Utils.Random(chance))
+        {
+            if(Player.p.s.currentAmmo<Player.p.finalStats[Stats.Stattype.MaxAmmo])
+                Player.p.s.currentAmmo++;
+
+        }
     }
 
     public BiomassUpgrade(Upgrade u) : base(u){ }
