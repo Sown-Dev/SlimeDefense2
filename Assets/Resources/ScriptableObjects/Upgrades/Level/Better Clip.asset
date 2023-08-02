@@ -13,6 +13,17 @@ MonoBehaviour:
   m_Name: Better Clip
   m_EditorClassIdentifier: 
   u:
+    Name: Better Clip
+    Description: '<color=green>Ammo Capacity +10%
+
+      Reload Time -10%
+
+      </color>
+
+'
+    Pool: 0
+    Base: 1
+    Retain: 0
     st:
       stats:
       - type: 6
@@ -21,17 +32,24 @@ MonoBehaviour:
       - type: 7
         amount: 0.9
         operation: 1
-    Name: Clip
-    Description: '<color=green>Ammo Capacity +10%
-
-      Reload Time -10%
-
-      </color>
-
-'
+    Children:
+    - {fileID: 11400000, guid: a5bb53da92ad9cd47bb16d27edd09fa5, type: 2}
+    - {fileID: 11400000, guid: 930a0cdc9b22c294bac785ea84d17673, type: 2}
     Icon: {fileID: 21300000, guid: a7ed1b055d551d94c9d98aa554094404, type: 3}
     debuffs:
       parent: {fileID: 0}
-      debuffs: []
+      debuffs:
+      - type: 0
+        icon: {fileID: 0}
+        particlePrefab: {fileID: 0}
+        particles: {fileID: 0}
+        duration: 0
+        strength: 0
+        isStats: 0
+        stats:
+          stats: []
+        maxTime: 0
+        hpPerSec: 0
+        addStrength: 0
     HealOnPickup: 0
-  type: Upgrade
+  Unlocked: 1

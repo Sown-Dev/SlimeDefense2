@@ -4,19 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public delegate void Deleg(Slime s); 
+public delegate void Deleg(Slime s);
 
-public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
-{
+public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable{
     public static event Deleg OnDeath;
+
     // Start is called before the first frame update
     public Transform target;
     private Rigidbody2D rb;
     public GameObject deathParticles;
     public GameObject spawnOnDeath;
     public Animator am;
+    public SpriteRenderer mySr;
+    public SpriteRenderer hitSr;
+    
     public SlimeState State;
     
+
     [field: SerializeField] public float maxHealth{ get; set; }
     public float Health{ get; set; }
     public float XPGain = 10f;
@@ -31,77 +35,82 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
 
     void Start(){
         debuffs = new Debuffs(transform);
-        tElapsed =Random.Range(0,DELAY);
+        tElapsed = Random.Range(0, DELAY);
         rb = gameObject.GetComponent<Rigidbody2D>();
         Health = maxHealth;
         target = GameObject.FindGameObjectWithTag("Player").transform;
         am.SetTrigger("Spawn");
+        hitSr.sprite = mySr.sprite;
     }
 
     public float DELAY = 0.9f;
     public float tElapsed = 0;
+
     private void Update(){
-        debuffs.Tick(this,this);
+        debuffs.Tick(this, this);
         switch (State){
             //both states have the recycling code but passive slimes recycle at a lower threshold
             case SlimeState.Passive:{
                 //recycling code
                 if (target){
-                    if (Vector2.Distance(transform.position, target.position) > 240 && GameManager.gm.currentSlimes>80){
+                    if (Vector2.Distance(transform.position, target.position) > 240 &&
+                        GameManager.gm.currentSlimes > 80){
                         GameManager.gm.recycle(this);
                     }
                 }
+
                 break;
             }
-                
+
             case SlimeState.Aggressive:{
                 //recycling code
                 if (target){
-                    if (Vector2.Distance(transform.position, target.position) > 220 && GameManager.gm.currentSlimes>90){
+                    if (Vector2.Distance(transform.position, target.position) > 220 &&
+                        GameManager.gm.currentSlimes > 90){
                         GameManager.gm.recycle(this);
                     }
-                    if (Vector2.Distance(transform.position, target.position) > 20 && GameManager.gm.currentSlimes>90 && 
-                        id+100 < GameManager.nextId){ //get old slimes based on id
+
+                    if (Vector2.Distance(transform.position, target.position) > 20 &&
+                        GameManager.gm.currentSlimes > 90 &&
+                        id + 100 < GameManager.nextId){ //get old slimes based on id
                         GameManager.gm.recycle(this);
                     }
                 }
-                tElapsed+= Time.deltaTime;
-                
+
+                tElapsed += Time.deltaTime;
+
                 // #TODO: add strengt multiplier
                 float finalDelay = DELAY;
-                if (debuffs[Debuffs.DebuffTypes.Slow])
-                {
+                if (debuffs[Debuffs.DebuffTypes.Slow]){
                     finalDelay *= 2;
                 }
-                
-                if (tElapsed > DELAY ){
+
+                if (tElapsed > DELAY){
                     tElapsed = 0;
                     if (target){
                         Jump();
                     }
                 }
-                
+
                 break;
             }
-               
-            
         }
-        
-        
-       
-        
     }
 
     public void Jump(){
         Vector2 dist = target.position - transform.position;
-        rb.AddForce((dist.normalized+(Random.insideUnitCircle*0.4f)) *speed);
+
+        float finalSpeed = speed;
+        if(debuffs[Debuffs.DebuffTypes.Slow])
+            finalSpeed*=0.5f;
+        rb.AddForce((dist.normalized + (Random.insideUnitCircle * 0.4f)) * finalSpeed);
         am.SetTrigger("Jump");
     }
-    
+
     public void TakeDamage(float dmg){
-        if(State != SlimeState.Aggressive)
+        if (State != SlimeState.Aggressive)
             State = SlimeState.Aggressive;
-        
+
         am.SetTrigger("Hit");
         Health -= dmg;
         if (Health <= 0){
@@ -116,42 +125,42 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable
         }
     }
 
-   
+
     public void die(){
         Destroy(gameObject);
-        
-        GameObject particles = Instantiate(deathParticles,transform.position,transform.rotation);
+
+        GameObject particles = Instantiate(deathParticles, transform.position, transform.rotation);
         var m = particles.GetComponent<ParticleSystem>().main;
         m.startColor = color;
         OnDeath?.Invoke(this);
-        if(spawnOnDeath!=null)
-            Instantiate(spawnOnDeath,transform.position,transform.rotation);
-        
+        if (spawnOnDeath != null)
+            Instantiate(spawnOnDeath, transform.position, transform.rotation);
+
         GoldManager.gm.SpawnGold(transform.position, goldDrop);
     }
 
     private void OnCollisionEnter2D(Collision2D col){
-        if(col.gameObject.GetComponent<IFriendlyDamagable>() != null){
+        if (col.gameObject.GetComponent<IFriendlyDamagable>() != null){
             col.gameObject.GetComponent<IFriendlyDamagable>().TakeDamage(10);
-            col.rigidbody?.AddForce((col.gameObject.transform.position-transform.position).normalized*
-                                    Player.p.finalStats[Stats.Statstype.KnockbackRecieved]*400);
-            rb.AddForce((col.gameObject.transform.position-transform.position).normalized* -150f);
+            col.rigidbody?.AddForce((col.gameObject.transform.position - transform.position).normalized *
+                                    Player.p.finalStats[Stats.Statstype.KnockbackRecieved] * 400);
+            rb.AddForce((col.gameObject.transform.position - transform.position).normalized * -150f);
 
-            if (col.gameObject.GetComponent<IStatusEffectable>() !=null && onHitApply != null)  
-            {
-                col.gameObject.GetComponent<IStatusEffectable>().ApplyStatusEffect(onHitApply);
+            if (col.gameObject.GetComponent<IStatusEffectable>() != null && onHitApply != null){
+                if(onHitApply.particles != null)
+                    col.gameObject.GetComponent<IStatusEffectable>().ApplyStatusEffect(onHitApply);
             }
         }
     }
 
     public enum SlimeState{
-        Passive=1,
-        Aggressive=2,
+        Passive = 1,
+        Aggressive = 2,
     }
 
-    
+
     //Debuff stuff
-    [HideInInspector] public Debuffs debuffs;
+    public Debuffs debuffs{ get; set; }
 
     public void ApplyStatusEffect(StatusEffect statusEffect){
         debuffs.AddDebuff(statusEffect);

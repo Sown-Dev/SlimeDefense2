@@ -32,6 +32,7 @@ public class StatusEffect{
         maxTime = other.maxTime;
         hpPerSec = other.hpPerSec;
         addStrength = other.addStrength;
+        icon= other.icon;
     }
 
     private float tickElapsed;

@@ -7,6 +7,8 @@ public class Interactable : MonoBehaviour{
     [HideInInspector] public Color toColor;
     [HideInInspector] public bool interactable = true;
     [HideInInspector] public SpriteRenderer sr;
+    [HideInInspector]public bool firstInteract = true;
+    [HideInInspector] public bool inRange = false;
     public Sprite postInteract;
     void Start(){
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -24,12 +26,14 @@ public class Interactable : MonoBehaviour{
                 //show E
                 eKey.enable();
                 toColor = Color.white;
+                inRange = true;
 
                 if (Input.GetKeyDown("e")){
                     Interact();
                 }
             }
             else{
+                inRange = false;
                 eKey.disable();
                 toColor = Color.black;
             }

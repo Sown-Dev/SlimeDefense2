@@ -30,4 +30,7 @@ MonoBehaviour:
       - type: 14
         amount: 0
         operation: 2
+      - type: 24
+        amount: 0
+        operation: 2
     name: John

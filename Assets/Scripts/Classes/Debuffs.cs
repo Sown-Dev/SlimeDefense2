@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public delegate void addStatusEffect(StatusEffect se);
+public delegate void removeStatusEffect(StatusEffect se);
+
+
 [Serializable]
 public class Debuffs{
+
+    public event addStatusEffect OnAddStatusEffect;
+    public event removeStatusEffect OnRemoveStatusEffect;
+    
+    
     public Transform parent;
     public enum DebuffTypes{
         Poison = 1,

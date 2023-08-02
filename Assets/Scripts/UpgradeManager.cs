@@ -12,16 +12,18 @@ public class UpgradeManager : MonoBehaviour{
     public KillClipUpgrade killclip;
     public StandingUpgrade bipod;
     public StandingUpgrade riotshield;
-    public StandingUpgrade fungus;
     public StandingUpgrade sentry;
-    public StandingUpgrade fort;
     public OneTapUpgrade onetap;
+    public BulletsOnKillUpgrade bulletsOnKill;
     
     
     [Header("CustomUtilityUpgrades")]
     public BiomassUpgrade biomass;
-
     public TrainingUpgrade training;
+    public StandingUpgrade stockpile;
+    [Header("CustomMedUpgrades")] public VampireUpgrade vamp;
+    public StandingUpgrade fungus;
+
     
     public static UpgradeManager um;
     public Player player;
@@ -39,7 +41,7 @@ public class UpgradeManager : MonoBehaviour{
     
     public Queue<List<Upgrade>> UpgradeQueue = new Queue<List<Upgrade>>(); //queue of upgrades to be given to player after 1st
 
-    [HideInInspector] public Dictionary<UpgradePool, List<Upgrade>> Pools = new Dictionary<UpgradePool, List<Upgrade>>();
+    public Dictionary<UpgradePool, List<Upgrade>> Pools = new Dictionary<UpgradePool, List<Upgrade>>();
     private void Awake(){
         um = this;
         //Debug.Log(Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades").Length);
@@ -50,20 +52,21 @@ public class UpgradeManager : MonoBehaviour{
         LevelUpgradePool.Add(killclip);
         LevelUpgradePool.Add(bipod);
         LevelUpgradePool.Add(riotshield);
-        LevelUpgradePool.Add(fungus);
         LevelUpgradePool.Add(sentry);
-        LevelUpgradePool.Add(fort);
         LevelUpgradePool.Add(onetap);
+        LevelUpgradePool.Add(bulletsOnKill);
         
         
         UtilityUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Utility").Select(x => x.u).Where(x => x.Base).ToList();
 
         UtilityUpgradePool.Add(biomass);
         UtilityUpgradePool.Add(training);
+        UtilityUpgradePool.Add(stockpile);
 
         
         MedUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Med Crate").Select(x => x.u).Where(x => x.Base).ToList();
-
+        MedUpgradePool.Add(vamp);
+        MedUpgradePool.Add(fungus);
 
         Pools[UpgradePool.Level] = LevelUpgradePool;
         Pools[UpgradePool.Utility] = UtilityUpgradePool;
@@ -133,7 +136,9 @@ public class UpgradeManager : MonoBehaviour{
         upgradeViewer.UpdateIcons();
 
         //removes upgrade from pool and adds its children if it has any
-        Pools[u.Pool].Remove(u);
+        if(!u.Retain)
+            Pools[u.Pool].Remove(u);
+        
         if (u.Children != null){
             foreach (UpgradeSO child in u.Children){
                 Pools[u.Pool].Add(child.u);

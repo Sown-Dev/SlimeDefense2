@@ -13,21 +13,23 @@ MonoBehaviour:
   m_Name: Angry Bullets
   m_EditorClassIdentifier: 
   u:
+    Name: Angry Bullets
+    Description: '<color=green>Projectile Speed +5%
+
+      Damage +10%</color>'
+    Pool: 0
+    Base: 1
+    Retain: 0
     st:
       stats:
       - type: 8
         amount: 1.05
         operation: 1
-      - type: 1
-        amount: 1.1
-        operation: 1
-    Name: Angry Bullets
-    Description: '<color=green>Projectile Speed +5%
-
-      Damage +10%</color>'
+    Children:
+    - {fileID: 11400000, guid: dab65401bd1474f49aa8afe5c784f0cd, type: 2}
     Icon: {fileID: 21300000, guid: ae27f4c55c1363043bbf97f1596d1b40, type: 3}
     debuffs:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
-  type: Upgrade
+  Unlocked: 1

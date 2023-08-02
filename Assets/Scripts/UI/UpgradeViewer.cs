@@ -32,7 +32,7 @@ public class UpgradeViewer : MonoBehaviour{
             Destroy(child.gameObject);
         }
         foreach (Upgrade u in p.Upgrades){
-            Instantiate(upgradePrefab,upgradesParent).GetComponent<UpgradeIcon>().Icon.sprite = u.Icon;
+            Instantiate(upgradePrefab,upgradesParent).GetComponent<UpgradeIcon>().u = u;
         }
     }
 }

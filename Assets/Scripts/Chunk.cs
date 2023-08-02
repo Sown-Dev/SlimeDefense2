@@ -43,7 +43,7 @@ public class Chunk : MonoBehaviour{
             Vector3 randPos = new Vector3(Random.Range(-50,50),Random.Range(-50,50),0);
             GameManager.SpawnGreenSlime(randPos + (Vector3)(Vector2)(pos * 100), Slime.SlimeState.Passive);
         }
-        for(int i= (int) Random.Range(1,5); i>0; i--){
+        for(int i= (int) Random.Range(7,10); i>0; i--){
             Vector3 randPos = new Vector3(Random.Range(-50,50),Random.Range(-50,50),0);
             GameObject go= Instantiate(MedCrate, randPos + (Vector3)(Vector2)(pos * 100), Quaternion.identity);
             go.transform.parent = transform;

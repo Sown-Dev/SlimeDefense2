@@ -1,7 +1,14 @@
-public class MedCrate: Interactable{
+public class MedCrate: CostedCrate{
     public override void Interact(){
-        UpgradeManager.um.MedUpgradeObtain();
-        interactable = false;
-        sr.sprite = postInteract;
+        if (Player.p.SpendGold(cost)){
+            interactable = false;
+            firstInteract = false;
+            Player.p.RemoveGold(cost);
+            base.Interact();
+            UpgradeManager.um.MedUpgradeObtain();
+            sr.sprite = postInteract;
+
+        }
+        
     }
 }

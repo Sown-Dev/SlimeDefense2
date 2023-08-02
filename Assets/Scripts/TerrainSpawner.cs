@@ -2,10 +2,13 @@
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Tilemaps;
+    using Random = UnityEngine.Random;
 
     public class TerrainSpawner: MonoBehaviour{
         public Player p;
 
+
+        public GameObject radioPrefab;
         public GameObject chunkPrefab;
 
         public Dictionary<Vector2Int,Chunk> Chunks;
@@ -15,6 +18,8 @@
         private List<Tile> GroundTiles;
 
         public  Tilemap myTilemap;
+
+        [HideInInspector]public GameObject radioInstance;
 
         private void GenerateTiles(){
             GroundTiles = new List<Tile>();
@@ -28,6 +33,9 @@
             GenerateTiles();
             Chunks = new Dictionary<Vector2Int, Chunk>();
             currentChunk = SpawnChunk(new Vector2Int(0,0));
+
+            Vector2 randomPos = Random.insideUnitCircle * Random.Range(400, 500);
+            radioInstance = Instantiate(radioPrefab, randomPos, Quaternion.identity);
         }
 
         void Update(){

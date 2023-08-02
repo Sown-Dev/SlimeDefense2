@@ -14,7 +14,8 @@ public class StatusEffectUIInstance : MonoBehaviour{
         }
 
         private void Update(){
-            TimeLeft.text = Math.Round(mySE.duration, 1) +"s";
+            Fill.fillAmount = mySE.duration / mySE.maxTime;
+            TimeLeft.text = Math.Round(mySE.duration, 1) +"";
             Fill.fillAmount = mySE.duration / mySE.maxTime;
         }
     }

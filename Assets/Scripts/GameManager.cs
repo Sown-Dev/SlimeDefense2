@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour{
 
     [Header("Timer")] public TMP_Text timerTxt;
     public double TimeElapsed;
-    public bool Prep = true;
     private float PrepTime = 50f;
 
 //Director stuff:
@@ -37,10 +36,9 @@ public class GameManager : MonoBehaviour{
     public int currentSlimes = 0;
 
     private void Awake(){
+        currentPhase=Phase.prep;
         Slime.OnDeath += SlimeDeath;
         gm = this;
-        Prep = true;
-        //SpawnInfoList.Add(GreenSlime);
     }
 
     int wavesToSkip = 0;
@@ -54,16 +52,35 @@ public class GameManager : MonoBehaviour{
 
 
         creditIncome = (int)(90 + (TimeElapsed / 2.6f) + difficulty * 32);
-
-        if (Prep && TimeElapsed > PrepTime){
-            Prep = false;
+    
+        
+        
+        
+        //phase check
+        
+        if (currentPhase==Phase.prep && TimeElapsed > PrepTime){
+            currentPhase = Phase.waitforsignal; 
             TimeElapsed = 0;
             difficulty += 1;
             currentCredits += 130;
         }
+        if (currentPhase==Phase.waitforsignal && TimeElapsed > SignalTime){
+            GetSignal();
+            difficulty += 2;
+            wavesToSkip++;
+        }
+        if (currentPhase==Phase.waitforheli){
+            heliElapsed += Time.deltaTime;
+            if (heliElapsed > HeliTime){
+                ArriveHeli();
+                difficulty*=2;
+                wavesToSkip++;
+            }
+            
+        }
+        
 
-
-        if (!Prep){
+        if (currentPhase!=Phase.prep){
             if (difficulty < TimeElapsed / 50){
                 difficulty++;
             }
@@ -101,7 +118,7 @@ public class GameManager : MonoBehaviour{
 
 
         //Timer text
-        if (Prep){
+        if (currentPhase == Phase.prep){
             float timeLeft = (float)(PrepTime - TimeElapsed);
             timerTxt.text = "<size=60>Horde Arriving in:</size>\n" + (int)timeLeft / 60 + ":" +
                             (timeLeft % 60).ToString("00");
@@ -155,20 +172,24 @@ public class GameManager : MonoBehaviour{
     public void SpawnSlime(GameObject slime){
         Vector3 Origin = player.transform.position;
         
-        //Old random code
-        /*
-        Vector3 rand = new Vector3(Random.Range(8, 11), Random.Range(8, 11), 0);
-        rand.x *= Random.Range(-1, 1) == 0 ? 1 : -1; //randomly invert x and y
-        rand.y *= Random.Range(-1, 1) == 0 ? 1 : -1;   */
         
-        //new
 
-        Bounds inside = new Bounds(player.rb.velocity.normalized*-2, new Vector3(8,8,1));
-        Gizmos.DrawWireCube(inside.center, inside.size);
+        Bounds inside = new Bounds(player.rb.velocity.normalized * -1.5f, new Vector3(15,15,0));
+        //draw rectangle for inside bounds:
+        /*Debug.DrawLine(Origin+ inside.center + new Vector3(inside.extents.x, inside.extents.y, 0),
+            Origin+inside.center + new Vector3(-inside.extents.x, inside.extents.y, 0), Color.red, 1f);
+        Debug.DrawLine(Origin+inside.center + new Vector3(inside.extents.x, inside.extents.y, 0),
+            Origin+inside.center + new Vector3(inside.extents.x, -inside.extents.y, 0), Color.red, 1f);
+        Debug.DrawLine(Origin+inside.center + new Vector3(-inside.extents.x, -inside.extents.y, 0),
+            Origin+inside.center + new Vector3(-inside.extents.x, inside.extents.y, 0), Color.red, 1f);
+        Debug.DrawLine(Origin+inside.center + new Vector3(-inside.extents.x, -inside.extents.y, 0),
+            Origin+inside.center + new Vector3(inside.extents.x, -inside.extents.y, 0), Color.red, 1f);*/
         
-        Vector3 rand = Utils.RandomBetweenBounds(new Bounds(Vector3.zero, new Vector3(12, 12, 1)), inside);
+        
+        Vector3 rand = Utils.RandomBetweenBounds(new Bounds(Vector3.zero, new Vector3(20, 20, 0)), inside);
 
         Vector3 spawnPos = Origin + rand;
+        Debug.DrawLine(Origin, inside.center, Color.blue, 1f);
         SpawnSlime(spawnPos, slime, Slime.SlimeState.Aggressive);
     }
 
@@ -207,4 +228,33 @@ public class GameManager : MonoBehaviour{
         currentCredits += s.creditCost;
         s.die();
     }
+    
+    //story stuff:
+
+    public DeviceUI dui;
+    public Phase currentPhase;
+
+    public float SignalTime = 120;
+    public void GetSignal(){
+        dui.AcquireSignal();
+        currentPhase = Phase.followsignal;
+    }
+    
+    public void CallHeli(){
+        currentPhase = Phase.waitforheli;
+        dui.RemoveSignal();
+    }
+
+    public float HeliTime = 1200;
+    float heliElapsed = 0;
+    public void ArriveHeli(){
+        currentPhase = Phase.followheli;
+    }
+}
+public enum Phase{
+    prep=1,
+    waitforsignal=2,
+    followsignal=3,
+    waitforheli=4,
+    followheli=5,
 }

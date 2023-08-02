@@ -8,12 +8,14 @@ using UnityEngine.UI;
 
 
 public delegate void LevelUp(Player p, UpgradeManager um);
+
+public delegate void UpdateStats(Player p, UpgradeManager um);
 public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
 {
-
+    public static event UpdateStats OnUpdateStats;
     public static event LevelUp OnLevelUp;
     
-    [Header("Debuffs")] public Debuffs debuffs;
+    public Debuffs debuffs{ get; set; }
     
     [Header("UI")] public Image xpBar;
     public TMP_Text xpText;
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     public Shooting s;
 
     public void CalculateStats(){
+        OnUpdateStats?.Invoke(this, UpgradeManager.um);  //calculated before rewriting stats, meaning that it uses previously calculated stats
         finalStats = new Stats(1);
         finalStats.Combine(character.stats);
         finalStats.Combine(Weapon.baseStats);
@@ -53,7 +56,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         
 
         UpdateHPUI();
-        cmvc.m_Lens.OrthographicSize = 6.5f* finalStats[Stats.Statstype.FOV];
+        cmvc.m_Lens.OrthographicSize = 6.8f* finalStats[Stats.Statstype.FOV];
     }
     
     void Awake(){
@@ -63,6 +66,10 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         Weapon = myWeapon.w;
         Init();
         CalculateStats();
+
+        
+        
+        
         Health= finalStats[Stats.Statstype.MaxHealth];
         
         xpBar.fillAmount = currentXp / maxXp;
@@ -74,6 +81,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         
         weaponIcon.sprite = Weapon.sprite;
         UpdateGoldTxt();
+
     }
 
 
@@ -118,7 +126,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
             LevelUp();
             level++;
             currentXp -= maxXp;
-            maxXp *= 1.27f;
+            maxXp *= 1.26f;
         }
 
         xpText.text = Convert.ToInt32(currentXp) + "/" + Convert.ToInt32(maxXp);
@@ -131,6 +139,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     
     //Health & Damage
     public void TakeDamage(float dmg){
+        CalculateStats();
         dmg *=  (finalStats[Stats.Statstype.Resistance]);
         Health -= dmg;
         UpdateHPUI();
@@ -165,7 +174,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     public void UpdateHPUI(){
         maxHealth = finalStats[Stats.Statstype.MaxHealth];
         hpBar.fillAmount = Health / finalStats[Stats.Statstype.MaxHealth];
-        hpText.text = Convert.ToInt32(Health) + "/" + Convert.ToInt32(finalStats[Stats.Statstype.MaxHealth]);
+        hpText.text = Math.Round(Health,1) + "/" + Convert.ToInt32(finalStats[Stats.Statstype.MaxHealth]);
     }
 
     public void Die(){
@@ -173,8 +182,13 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     }
 
     public void Heal(float amt){
+        if (amt < 0){
+            TakeDamage(-amt);
+            return;
+        }
+        CalculateStats();
         Debug.Log("healed for " + amt);
-        Health += amt;
+        Health += amt * finalStats[Stats.Statstype.HPMultiplier];
         if (Health > finalStats[Stats.Statstype.MaxHealth]){
             Health = finalStats[Stats.Statstype.MaxHealth];
         }

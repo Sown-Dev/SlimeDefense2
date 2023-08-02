@@ -37,7 +37,7 @@ public class DirectorInfo : MonoBehaviour{
         multiplier.text = "Multiplier: " + gm.statsMult;
         
         
-        if (Input.GetKeyDown(KeyCode.Numlock)){
+        if (Input.GetKeyDown(KeyCode.Insert)){
             open = !open;
         }
     }

@@ -13,18 +13,23 @@ MonoBehaviour:
   m_Name: Vitality
   m_EditorClassIdentifier: 
   u:
+    Name: Vitality
+    Description: '<color=green>Max Health +10</color>
+
+'
+    Pool: 0
+    Base: 1
+    Retain: 0
     st:
       stats:
       - type: 2
         amount: 10
         operation: 2
-    Name: Vitality
-    Description: '<color=green>Max Health +10</color>
-
-'
+    Children:
+    - {fileID: 11400000, guid: 45d64a2223a00d144afd782b4947168c, type: 2}
     Icon: {fileID: 21300000, guid: 6bd43f8353bf5f048acd00ff4fabb799, type: 3}
     debuffs:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 10
-  type: Upgrade
+  Unlocked: 1

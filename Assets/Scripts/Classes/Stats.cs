@@ -43,6 +43,8 @@ public class Stats : ICloneable{
         Recoil=20,
         KnockbackRecieved=21,
         GoldMultiplier=22,
+        HPMultiplier=23,
+        BackProjectiles=24,
     }
 
     public enum StatsOperation{

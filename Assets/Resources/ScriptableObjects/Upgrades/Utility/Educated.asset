@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: Educated
   m_EditorClassIdentifier: 
   u:
+    Name: Educated
+    Description: <color=green>XP Gain +15%</color>
+    Pool: 0
+    Base: 1
     st:
       stats:
       - type: 9
-        amount: 1.2
+        amount: 1.15
         operation: 1
-    Name: Educated
-    Description: <color=green>XP Gain +20%</color>
+    Children: []
     Icon: {fileID: 21300000, guid: 2aa1d963ddf6f1449bfd47d85228fb52, type: 3}
     debuffs:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
   type: Upgrade
+  Unlocked: 1

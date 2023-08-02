@@ -13,18 +13,23 @@ MonoBehaviour:
   m_Name: Medkit
   m_EditorClassIdentifier: 
   u:
+    Name: Medkit
+    Description: '<color=green>Max Health +20</color>
+
+'
+    Pool: 0
+    Base: 1
+    Retain: 0
     st:
       stats:
       - type: 2
-        amount: 25
+        amount: 20
         operation: 2
-    Name: Medkit
-    Description: '<color=green>Max Health +25</color>
-
-'
+    Children:
+    - {fileID: 11400000, guid: 12545f658d19c304cbc93141b5188347, type: 2}
     Icon: {fileID: 21300000, guid: 0aaa348b81d8c9d4f8afeba5de8e2827, type: 3}
     debuffs:
       parent: {fileID: 0}
       debuffs: []
-    HealOnPickup: 25
-  type: Upgrade
+    HealOnPickup: 20
+  Unlocked: 1

@@ -51,17 +51,20 @@ public class Bullet : MonoBehaviour{
         collision.attachedRigidbody?.AddForce((transform.position-collision.transform.position).normalized * rb.velocity.magnitude * rb.mass);
         
         if (go.GetComponent<IEnemyDamagable>() != null){
-            go.GetComponent<IEnemyDamagable>().TakeDamage(Damage);
-            Slime s = go.GetComponent<Slime>();
-            OnBulletHit?.Invoke(Damage, transform.position,s);
-            collision.attachedRigidbody.velocity *= 0.5f;
-            collision.attachedRigidbody.AddForce((transform.position-collision.transform.position).normalized * -200);
-            if(Penetration>0){
-                Penetration--;
-                return;
-            }
-            else{
-                BulletDestroy();
+            if (go.GetComponent<IEnemyDamagable>().Health > 0){
+                go.GetComponent<IEnemyDamagable>().TakeDamage(Damage);
+                Slime s = go.GetComponent<Slime>();
+                OnBulletHit?.Invoke(Damage, transform.position, s);
+                collision.attachedRigidbody.velocity *= 0.5f;
+                collision.attachedRigidbody.AddForce((transform.position - collision.transform.position).normalized *
+                                                     -200);
+                if (Penetration > 0){
+                    Penetration--;
+                    return;
+                }
+                else{
+                    BulletDestroy();
+                }
             }
         }
         else{

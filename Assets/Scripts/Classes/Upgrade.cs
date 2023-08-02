@@ -9,6 +9,7 @@ public class Upgrade{
     [HideInInspector] public UpgradePool Pool;
     
     public bool Base = true; //whether or not upgrade is a base upgrade
+    public bool Retain = false; //whether or not upgrade is removed from pool
     public Stats st;
 
     [Header("Children Upgrades:")]

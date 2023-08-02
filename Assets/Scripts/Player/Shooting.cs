@@ -101,7 +101,7 @@ public class Shooting : MonoBehaviour{
         gun.localScale = new Vector3(1, (ang > 90 || ang < -90) ? -1 : 1, 1);
         //transform.localPosition = (Vector2.left );
 
-        if (Input.GetMouseButton(0) ){
+        if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.C) ){
             Shoot();
         }
 
@@ -148,6 +148,26 @@ public class Shooting : MonoBehaviour{
         else{
             float randomAngle = Random.Range(totDegrees / -2, totDegrees / 2);
             ShootBullet(randomAngle, 0);
+        }
+        //back projectiles:
+        
+        int numBackProjectiles = Convert.ToInt32(player.finalStats[Stats.Statstype.BackProjectiles]);
+        if (numBackProjectiles > 1){
+            float totBackDegrees =
+                player.finalStats[Stats.Statstype.Spread] +
+                (2.5f * (numBackProjectiles - 1)); //slightly increases spread for each extra bullet
+            float startDeg = -totBackDegrees / 2;
+            float currentDeg = startDeg;
+            for (int i = 0; i < numBackProjectiles; i++){
+                ShootBullet(currentDeg+180, 0);
+                currentDeg += totDegrees / (numBackProjectiles - 1);
+            }
+        }
+        else{
+            if (numBackProjectiles > 0.5f){
+                float randomAngle = Random.Range(totDegrees / -2, totDegrees / 2);
+                ShootBullet(randomAngle+180, 0);
+            }
         }
         
         //reduce ammo at end:

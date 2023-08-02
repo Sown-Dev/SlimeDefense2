@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Agility
   m_EditorClassIdentifier: 
   u:
+    Name: Agility
+    Description: '<color=green>Movement Speed +8%
+
+      Reload Time -10%</color>'
+    Pool: 0
+    Base: 1
     st:
       stats:
       - type: 3
@@ -21,13 +27,11 @@ MonoBehaviour:
       - type: 7
         amount: 0.9
         operation: 1
-    Name: Boots
-    Description: '<color=green>Movement Speed +8%
-
-      Reload Time -10%</color>'
+    Children: []
     Icon: {fileID: 21300000, guid: efce7e1e24df40c4b9095f3e28579bf0, type: 3}
     debuffs:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
   type: Upgrade
+  Unlocked: 1
