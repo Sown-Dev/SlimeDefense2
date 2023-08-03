@@ -4,10 +4,11 @@ using UnityEngine;
 
 [Serializable]
 public class BiomassUpgrade : Upgrade{
+    
     public float chance;
 
-    public override void Init(Debuffs d){
-        base.Init(d);
+    public override void Init(Player player){
+        base.Init(player);
         Slime.OnDeath+= AddAmmo;
     }
 
@@ -20,5 +21,6 @@ public class BiomassUpgrade : Upgrade{
         }
     }
 
-    public BiomassUpgrade(Upgrade u) : base(u){ }
+    public BiomassUpgrade(Upgrade u) : base(u){
+    }
 }

@@ -12,7 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Bullet Compression
   m_EditorClassIdentifier: 
-  u:
+  Unlocked: 1
+  su:
+    Name: Bullet Compression
+    Description: '<color=red>Ammo Usage +1
+
+      Attack Speed -10%</color>
+
+      <color=green>Damage
+      +45%</color>
+
+'
+    Pool: 0
+    Base: 1
+    Retain: 0
     st:
       stats:
       - type: 1
@@ -27,18 +40,9 @@ MonoBehaviour:
       - type: 11
         amount: 1.2
         operation: 1
-    Name: Bullet Compression
-    Description: '<color=red>Ammo Usage +1
-
-      Attack Speed -10%</color>
-
-      <color=green>Damage
-      +45%</color>
-
-'
+    Children: []
     Icon: {fileID: 21300000, guid: f75a9fb365edb1248aea475df81bee09, type: 3}
     debuffs:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
-  type: Upgrade

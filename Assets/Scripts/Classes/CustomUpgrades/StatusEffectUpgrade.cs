@@ -8,9 +8,9 @@ public class StatusEffectUpgrade : Upgrade
     public StatusEffect se;
     public Color color;
     
-    public override void Init(Debuffs d){
+    public override void Init(Player player){
         Bullet.OnBulletHit += Debuff;
-        base.Init(d);
+        base.Init(player);
         Shooting.OnSpawnBullet+= AddColor;
     }
 

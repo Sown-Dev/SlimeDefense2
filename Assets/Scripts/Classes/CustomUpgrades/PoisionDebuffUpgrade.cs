@@ -5,9 +5,9 @@ using UnityEngine;
 public class PoisonDebuffUpgrade : Upgrade{
     
     
-    public override void Init(Debuffs d){
+    public override void Init(Player player){
         Bullet.OnBulletHit += Poison;
-        base.Init(d);
+        base.Init(player);
         Shooting.OnSpawnBullet+= AddColor;
     }
 

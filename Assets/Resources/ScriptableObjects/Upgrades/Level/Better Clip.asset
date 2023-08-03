@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Better Clip
   m_EditorClassIdentifier: 
-  u:
+  Unlocked: 1
+  su:
     Name: Better Clip
     Description: '<color=green>Ammo Capacity +10%
 
@@ -52,4 +53,3 @@ MonoBehaviour:
         hpPerSec: 0
         addStrength: 0
     HealOnPickup: 0
-  Unlocked: 1

@@ -12,7 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Sprayer
   m_EditorClassIdentifier: 
-  u:
+  Unlocked: 1
+  su:
+    Name: Sprayer
+    Description: '<color=green>Attack Speed +40%</color>
+
+      <color=red>Damage
+      -15%
+
+      Ammo Capacity -10%</color>
+
+'
+    Pool: 0
+    Base: 1
+    Retain: 0
     st:
       stats:
       - type: 4
@@ -24,15 +37,9 @@ MonoBehaviour:
       - type: 6
         amount: 0.9
         operation: 1
-    Name: Sprayer
-    Description: '<color=green>Attack Speed +40%</color>
-
-      <color=red>Damage
-      -15%
-
-      Ammo Capacity -10%</color>
-
-'
+    Children: []
     Icon: {fileID: 21300000, guid: 95fa305bb74b7a74ca7552e069cdb283, type: 3}
+    debuffs:
+      parent: {fileID: 0}
+      debuffs: []
     HealOnPickup: 0
-  type: Upgrade

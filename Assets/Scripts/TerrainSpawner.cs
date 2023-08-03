@@ -19,7 +19,7 @@
 
         public  Tilemap myTilemap;
 
-        [HideInInspector]public GameObject radioInstance;
+        public GameObject radioInstance;
 
         private void GenerateTiles(){
             GroundTiles = new List<Tile>();

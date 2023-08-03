@@ -13,7 +13,7 @@ public class GoldDrop : MonoBehaviour
 
     private void Start(){
         startPos = transform.position;
-        transform.localScale *= Mathf.Sqrt(amount)/2f;
+        transform.localScale *= Mathf.Sqrt(Mathf.Sqrt(amount))/1.5f;
     }
 
 

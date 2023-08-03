@@ -5914,14 +5914,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1871737746}
   m_Father: {fileID: 1432109733}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &300958622
 MonoBehaviour:
@@ -5941,9 +5942,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_Spacing: 10
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -6807,6 +6808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p: {fileID: 362014036}
+  radioPrefab: {fileID: 872590102943166210, guid: 8553ca6059cd1524582d3648eb79d2b7, type: 3}
   chunkPrefab: {fileID: 5865337916408698752, guid: 04c9c210958b6b2479fc78df25945424, type: 3}
   currentChunk: {fileID: 0}
   GroundSprites:
@@ -6816,6 +6818,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8d6dbc0f553165043be68834b0ede6fc, type: 3}
   - {fileID: 21300000, guid: e5b112200a7575a47a6eb464281afc55, type: 3}
   myTilemap: {fileID: 1628296720}
+  radioInstance: {fileID: 0}
 --- !u!1 &528359413
 GameObject:
   m_ObjectHideFlags: 0
@@ -7518,118 +7521,6 @@ MonoBehaviour:
       maxTime: 15
       hpPerSec: 0
       addStrength: 0
-  bipod:
-    Name: Bipod
-    Description: '<color=green>+70% Damage and Accuracy when standing still.
-
-      No
-      recoil when standing still</color>'
-    Pool: 0
-    Base: 1
-    Retain: 0
-    st:
-      stats: []
-    Children: []
-    Icon: {fileID: 21300000, guid: 9d05ca6cd97f46147b956231d91a8173, type: 3}
-    debuffs:
-      parent: {fileID: 0}
-      debuffs: []
-    HealOnPickup: 0
-    seBase:
-      type: 6
-      icon: {fileID: 21300000, guid: 9d05ca6cd97f46147b956231d91a8173, type: 3}
-      particlePrefab: {fileID: 8256011692595830633, guid: 38329c3e72428dd46b0b124b32d73686, type: 3}
-      particles: {fileID: 0}
-      duration: 0.05
-      strength: 1
-      isStats: 1
-      stats:
-        stats:
-        - type: 1
-          amount: 1.7
-          operation: 1
-        - type: 15
-          amount: 0.3
-          operation: 1
-        - type: 20
-          amount: 0
-          operation: 1
-      maxTime: 0.1
-      hpPerSec: 0
-      addStrength: 0
-  riotshield:
-    Name: Riot Shield
-    Description: '<color=green>Reduces damage by 60% when standing still.
-
-      Recieve
-      no knockback when standing still. </color>'
-    Pool: 0
-    Base: 1
-    Retain: 0
-    st:
-      stats: []
-    Children: []
-    Icon: {fileID: 21300000, guid: 6a17b1a9ecbfd2f4aa25621130c1c88b, type: 3}
-    debuffs:
-      parent: {fileID: 0}
-      debuffs: []
-    HealOnPickup: 0
-    seBase:
-      type: 6
-      icon: {fileID: 21300000, guid: 6a17b1a9ecbfd2f4aa25621130c1c88b, type: 3}
-      particlePrefab: {fileID: 8256011692595830633, guid: 38329c3e72428dd46b0b124b32d73686, type: 3}
-      particles: {fileID: 0}
-      duration: 0.05
-      strength: 1
-      isStats: 1
-      stats:
-        stats:
-        - type: 18
-          amount: 0.45
-          operation: 1
-        - type: 21
-          amount: 0
-          operation: 1
-      maxTime: 0.1
-      hpPerSec: 0
-      addStrength: 0
-  sentry:
-    Name: Sentry
-    Description: <color=green>Grants +80% Increased firerate and +1 Pierce when standing
-      still</color>
-    Pool: 0
-    Base: 1
-    Retain: 0
-    st:
-      stats: []
-    Children: []
-    Icon: {fileID: 21300000, guid: 69d171feebb1cd64cbf32344c71d9810, type: 3}
-    debuffs:
-      parent: {fileID: 0}
-      debuffs: []
-    HealOnPickup: 0
-    seBase:
-      type: 0
-      icon: {fileID: 21300000, guid: 69d171feebb1cd64cbf32344c71d9810, type: 3}
-      particlePrefab: {fileID: 8256011692595830633, guid: 38329c3e72428dd46b0b124b32d73686, type: 3}
-      particles: {fileID: 0}
-      duration: 0.05
-      strength: 1
-      isStats: 1
-      stats:
-        stats:
-        - type: 4
-          amount: 1.8
-          operation: 1
-        - type: 12
-          amount: 1
-          operation: 2
-        - type: 7
-          amount: 0.95
-          operation: 1
-      maxTime: 0.1
-      hpPerSec: 0
-      addStrength: 0
   onetap:
     Name: One in the chamber
     Description: '<color=green>First shot deals 2x damage and has +2 Pierce
@@ -7696,14 +7587,14 @@ MonoBehaviour:
     HealOnPickup: 0
     toGive:
       Name: Mastery
-      Description: <color=green>+3% damage</color>
+      Description: <color=green>+2% damage</color>
       Pool: 0
       Base: 1
       Retain: 0
       st:
         stats:
         - type: 1
-          amount: 1.03
+          amount: 1.02
           operation: 1
       Children: []
       Icon: {fileID: 21300000, guid: 71d2511d27c31f04499a79af1a2312c3, type: 3}
@@ -7711,33 +7602,6 @@ MonoBehaviour:
         parent: {fileID: 0}
         debuffs: []
       HealOnPickup: 0
-  stockpile:
-    Name: Stockpile
-    Description: 
-    Pool: 0
-    Base: 0
-    Retain: 0
-    st:
-      stats: []
-    Children: []
-    Icon: {fileID: 0}
-    debuffs:
-      parent: {fileID: 0}
-      debuffs: []
-    HealOnPickup: 0
-    seBase:
-      type: 0
-      icon: {fileID: 0}
-      particlePrefab: {fileID: 0}
-      particles: {fileID: 0}
-      duration: 0
-      strength: 0
-      isStats: 0
-      stats:
-        stats: []
-      maxTime: 0
-      hpPerSec: 0
-      addStrength: 0
   vamp:
     Name: Vampire
     Description: <color=green>Gain +0.1 health on kill</color>
@@ -7752,34 +7616,7 @@ MonoBehaviour:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
-    amount: 0.2
-  fungus:
-    Name: Odd Fungus
-    Description: <color=green>Heals for 0.5hp/s when standing still</color>
-    Pool: 0
-    Base: 1
-    Retain: 0
-    st:
-      stats: []
-    Children: []
-    Icon: {fileID: 21300000, guid: a025ebcf5dcf7c54b8289a1b0f058d79, type: 3}
-    debuffs:
-      parent: {fileID: 0}
-      debuffs: []
-    HealOnPickup: 0
-    seBase:
-      type: 5
-      icon: {fileID: 21300000, guid: a025ebcf5dcf7c54b8289a1b0f058d79, type: 3}
-      particlePrefab: {fileID: 8256011692595830633, guid: f1040a5f51a1c4e40afedaa1695205bd, type: 3}
-      particles: {fileID: 0}
-      duration: 0.05
-      strength: 1
-      isStats: 0
-      stats:
-        stats: []
-      maxTime: 0.1
-      hpPerSec: 0.5
-      addStrength: 0
+    amount: 0.1
   player: {fileID: 362014036}
   upgradeViewer: {fileID: 140904516}
   upgradeUI: {fileID: 2098285868}
@@ -7813,6 +7650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 619394802}
   - component: {fileID: 619394801}
+  - component: {fileID: 619394803}
   m_Layer: 0
   m_Name: Global Light 2D
   m_TagString: Untagged
@@ -7914,6 +7752,81 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &619394803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619394800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611b7d251a5d5624aba126bc5d24394c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gm: {fileID: 1084661740}
+  ac:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0018552872
+      value: 0.7744362
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.19604021
+      value: 0.7022608
+      inSlope: -1.0309471
+      outSlope: -1.0309471
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3799337
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.46751606
+      value: -0.015655398
+      inSlope: -0.027447442
+      outSlope: -0.027447442
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.64037174
+      value: -0.016433394
+      inSlope: 0.3211479
+      outSlope: 0.3211479
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.3574201
+    - serializedVersion: 3
+      time: 0.82849133
+      value: 0.6641097
+      inSlope: 1.3887266
+      outSlope: 1.3887266
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.39057592
+    - serializedVersion: 3
+      time: 1.0111012
+      value: 0.7706811
+      inSlope: 0.18427171
+      outSlope: 0.18427171
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.67015153
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 4
+  globalLight: {fileID: 619394801}
+  dayDuration: 360
 --- !u!1 &659782283
 GameObject:
   m_ObjectHideFlags: 0
@@ -8577,6 +8490,7 @@ MonoBehaviour:
   Open: 0
   cg: {fileID: 900850049}
   rt: {fileID: 900850045}
+  ts: {fileID: 475930418}
   cross: {fileID: 819312214}
   text: {fileID: 1524035588}
   textbox: {fileID: 1798675630}
@@ -8587,7 +8501,8 @@ MonoBehaviour:
   right: {fileID: 21300000, guid: 23169a2f00937f441a9daafb83231919, type: 3}
   hasSignal: 0
   hasText: 0
-  panelPos: {x: 0, y: 0}
+  player: {fileID: 0}
+  consolePos: {fileID: 0}
 --- !u!114 &900850047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14091,7 +14006,6 @@ MonoBehaviour:
   greenSlime: {fileID: 3507637108879700206, guid: 3318c5963f9cc93488c0eb1ac60d92bb, type: 3}
   timerTxt: {fileID: 992427513}
   TimeElapsed: 0
-  Prep: 1
   currentCredits: 0
   creditIncome: 0
   CurrentHand: []
@@ -14100,6 +14014,10 @@ MonoBehaviour:
   creditMult: 1
   statsMult: 1
   lowestID: 0
+  dui: {fileID: 900850046}
+  currentPhase: 0
+  SignalTime: 120
+  HeliTime: 1200
 --- !u!4 &1084661741
 Transform:
   m_ObjectHideFlags: 0
@@ -16068,7 +15986,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 126.899994}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1432109734
 MonoBehaviour:
@@ -17714,6 +17632,108 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 600, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1871737745
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 300958621}
+    m_Modifications:
+    - target: {fileID: 5309902399836918531, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_Name
+      value: StatusEffectUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+--- !u!224 &1871737746 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5309902399836918556, guid: e47ced7c618dcf84788a7d896e2bb157, type: 3}
+  m_PrefabInstance: {fileID: 1871737745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1888809670 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3669465119689011471, guid: 76eec68aa1706784da0f7757e1b9c76c, type: 3}

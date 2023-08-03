@@ -187,18 +187,21 @@ public class Shooting : MonoBehaviour{
         SpawnBullet(gunPos.position, rot, offset);
     }
 
-    public void SpawnBullet(Vector3 pos, Vector3 rotation, float offset){
+    public Bullet SpawnBullet(Vector3 pos, Vector3 rotation, float offset){
         GameObject bul = Instantiate(bullet, pos, Quaternion.Euler(rotation));
         bul.transform.localScale = Vector3.one;
         bul.transform.localScale *= player.finalStats[Stats.Statstype.BulletSize];
 
-        bul.GetComponent<Bullet>().Init(player.finalStats[Stats.Statstype.Damage],
+        Bullet b = bul.GetComponent<Bullet>();
+        b.Init(player.finalStats[Stats.Statstype.Damage],
             player.finalStats[Stats.Statstype.ProjSpeed],
             Convert.ToInt32(player.finalStats[Stats.Statstype.Penetration]));
 
         OnSpawnBullet?.Invoke( currentAmmo, player, bul.GetComponent<Bullet>());
         
         Destroy(bul, 2f);
+
+        return b;
     }
 
 

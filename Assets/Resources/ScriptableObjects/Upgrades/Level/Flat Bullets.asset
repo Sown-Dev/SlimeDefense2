@@ -12,18 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Flat Bullets
   m_EditorClassIdentifier: 
-  u:
-    st:
-      stats:
-      - type: 1
-        amount: 5
-        operation: 2
+  Unlocked: 1
+  su:
     Name: Flat Bullets
     Description: '<color=green>Damage +5
 
       </color>
 
 '
+    Pool: 0
+    Base: 1
+    Retain: 0
+    st:
+      stats:
+      - type: 1
+        amount: 5
+        operation: 2
+    Children: []
     Icon: {fileID: 21300000, guid: 0b52796cd5cbae14db1471a1e867154b, type: 3}
+    debuffs:
+      parent: {fileID: 0}
+      debuffs: []
     HealOnPickup: 0
-  type: Upgrade

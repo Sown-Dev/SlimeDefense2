@@ -8,12 +8,14 @@ using UnityEngine.UI;
 
 
 public delegate void LevelUp(Player p, UpgradeManager um);
-
+public delegate void Update(Player p, UpgradeManager um);
 public delegate void UpdateStats(Player p, UpgradeManager um);
+
 public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
 {
     public static event UpdateStats OnUpdateStats;
     public static event LevelUp OnLevelUp;
+    public static event Update OnUpdate;
     
     public Debuffs debuffs{ get; set; }
     
@@ -88,6 +90,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     private float RegenElapsed = 0;
     private int prevDebuffCount = 0;
     void Update(){
+        OnUpdate?.Invoke(this, UpgradeManager.um);
         debuffs.Tick(this,this);
 
         if (debuffs.debuffs.Count != prevDebuffCount){

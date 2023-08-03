@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Vitality
   m_EditorClassIdentifier: 
-  u:
+  Unlocked: 1
+  su:
     Name: Vitality
     Description: '<color=green>Max Health +10</color>
 
@@ -31,5 +32,4 @@ MonoBehaviour:
     debuffs:
       parent: {fileID: 0}
       debuffs: []
-    HealOnPickup: 10
-  Unlocked: 1
+    HealOnPickup: 0

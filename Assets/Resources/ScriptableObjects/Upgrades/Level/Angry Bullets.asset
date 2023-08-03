@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Angry Bullets
   m_EditorClassIdentifier: 
-  u:
+  Unlocked: 1
+  su:
     Name: Angry Bullets
     Description: '<color=green>Projectile Speed +5%
 
@@ -32,4 +33,3 @@ MonoBehaviour:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
-  Unlocked: 1

@@ -12,7 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Tough Skin
   m_EditorClassIdentifier: 
-  u:
+  Unlocked: 1
+  su:
+    Name: Tough Skin
+    Description: '<color=green>Damage Resistance +10%</color>
+
+      <color=red>Max
+      Health -5</color>
+
+'
+    Pool: 0
+    Base: 1
+    Retain: 0
     st:
       stats:
       - type: 18
@@ -21,16 +32,9 @@ MonoBehaviour:
       - type: 2
         amount: -5
         operation: 2
-    Name: Tough Skin
-    Description: '<color=green>Damage Resistance +10%</color>
-
-      <color=red>Max
-      Health -5</color>
-
-'
+    Children: []
     Icon: {fileID: 21300000, guid: fd237aa647221d24c80f3355637b200f, type: 3}
     debuffs:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
-  type: Upgrade

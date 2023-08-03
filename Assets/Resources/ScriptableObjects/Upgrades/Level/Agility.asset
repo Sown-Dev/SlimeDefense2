@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Agility
   m_EditorClassIdentifier: 
-  u:
+  Unlocked: 1
+  su:
     Name: Agility
-    Description: '<color=green>Movement Speed +8%
+    Description: '<color=green>Movement Speed +10%
 
       Reload Time -10%</color>'
     Pool: 0
     Base: 1
+    Retain: 0
     st:
       stats:
       - type: 3
@@ -33,5 +35,3 @@ MonoBehaviour:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
-  type: Upgrade
-  Unlocked: 1

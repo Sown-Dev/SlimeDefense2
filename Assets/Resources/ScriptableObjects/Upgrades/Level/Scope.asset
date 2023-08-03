@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
   m_Name: Scope
   m_EditorClassIdentifier: 
-  u:
+  Unlocked: 1
+  su:
+    Name: Scope
+    Description: '<color=green>FOV +15%
+
+      Spread -30%</color>
+
+'
+    Pool: 0
+    Base: 1
+    Retain: 0
     st:
       stats:
       - type: 19
@@ -21,15 +31,9 @@ MonoBehaviour:
       - type: 15
         amount: 0.7
         operation: 1
-    Name: Scope
-    Description: '<color=green>FOV +15%
-
-      Spread -30%</color>
-
-'
+    Children: []
     Icon: {fileID: 21300000, guid: fc5d71e8236fdda4aa754eb428a87b79, type: 3}
     debuffs:
       parent: {fileID: 0}
       debuffs: []
     HealOnPickup: 0
-  type: Upgrade

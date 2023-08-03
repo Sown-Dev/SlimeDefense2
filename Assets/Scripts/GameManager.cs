@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour{
 
     public GameObject greenSlime;
 
-    [Header("Timer")] public TMP_Text timerTxt;
+    [Header("Timer")] public TMP_Text taskTxt;
+    public TMP_Text timerTxt;
     public double TimeElapsed;
     private float PrepTime = 50f;
 
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour{
     public int currentSlimes = 0;
 
     private void Awake(){
-        currentPhase=Phase.prep;
+        currentPhase = Phase.prep;
         Slime.OnDeath += SlimeDeath;
         gm = this;
     }
@@ -52,35 +53,34 @@ public class GameManager : MonoBehaviour{
 
 
         creditIncome = (int)(90 + (TimeElapsed / 2.6f) + difficulty * 32);
-    
-        
-        
-        
+
+
         //phase check
-        
-        if (currentPhase==Phase.prep && TimeElapsed > PrepTime){
-            currentPhase = Phase.waitforsignal; 
+
+        if (currentPhase == Phase.prep && TimeElapsed > PrepTime){
+            currentPhase = Phase.waitforsignal;
             TimeElapsed = 0;
             difficulty += 1;
-            currentCredits += 130;
+            currentCredits += 90;
         }
-        if (currentPhase==Phase.waitforsignal && TimeElapsed > SignalTime){
+
+        if (currentPhase == Phase.waitforsignal && TimeElapsed > SignalTime){
             GetSignal();
             difficulty += 2;
             wavesToSkip++;
         }
-        if (currentPhase==Phase.waitforheli){
+
+        if (currentPhase == Phase.waitforheli){
             heliElapsed += Time.deltaTime;
             if (heliElapsed > HeliTime){
                 ArriveHeli();
-                difficulty*=2;
+                difficulty *= 2;
                 wavesToSkip++;
             }
-            
         }
-        
 
-        if (currentPhase!=Phase.prep){
+
+        if (currentPhase > Phase.prep){
             if (difficulty < TimeElapsed / 50){
                 difficulty++;
             }
@@ -118,13 +118,34 @@ public class GameManager : MonoBehaviour{
 
 
         //Timer text
-        if (currentPhase == Phase.prep){
-            float timeLeft = (float)(PrepTime - TimeElapsed);
-            timerTxt.text = "<size=60>Horde Arriving in:</size>\n" + (int)timeLeft / 60 + ":" +
-                            (timeLeft % 60).ToString("00");
+
+        if (currentPhase > Phase.prep){
+            timerTxt.text = (int)TimeElapsed / 60 + ":" + ((int)TimeElapsed % 60).ToString("00");
         }
         else{
-            timerTxt.text = (int)TimeElapsed / 60 + ":" + (TimeElapsed % 60).ToString("00");
+            timerTxt.text = "";
+        }
+
+        switch (currentPhase){
+            case Phase.prep:
+                float timeLeft = (float)(PrepTime - TimeElapsed);
+                taskTxt.text = "<size=60>Horde Arriving in:</size>\n" + (int)timeLeft / 60 + ":" +
+                               ((int)timeLeft % 60).ToString("00");
+                break;
+            case Phase.waitforsignal:
+                taskTxt.text = "Survive";
+                break;
+            case Phase.followsignal:
+                taskTxt.text = "Follow signal";
+                break;
+            case Phase.waitforheli:
+                float heliRemainingTime = (HeliTime - heliElapsed);
+                taskTxt.text = "<size=60>Rescue Helicopter Arriving:</size>\n" + (int)heliRemainingTime / 60 + ":" +
+                               ((int)heliRemainingTime % 60).ToString("00");
+                break;
+            case Phase.followheli:
+                taskTxt.text = "Get to Evacuation Point";
+                break;
         }
     }
 
@@ -171,10 +192,9 @@ public class GameManager : MonoBehaviour{
 
     public void SpawnSlime(GameObject slime){
         Vector3 Origin = player.transform.position;
-        
-        
 
-        Bounds inside = new Bounds(player.rb.velocity.normalized * -1.5f, new Vector3(15,15,0));
+
+        Bounds inside = new Bounds(player.rb.velocity.normalized * -1.5f, new Vector3(15, 15, 0));
         //draw rectangle for inside bounds:
         /*Debug.DrawLine(Origin+ inside.center + new Vector3(inside.extents.x, inside.extents.y, 0),
             Origin+inside.center + new Vector3(-inside.extents.x, inside.extents.y, 0), Color.red, 1f);
@@ -184,8 +204,8 @@ public class GameManager : MonoBehaviour{
             Origin+inside.center + new Vector3(-inside.extents.x, inside.extents.y, 0), Color.red, 1f);
         Debug.DrawLine(Origin+inside.center + new Vector3(-inside.extents.x, -inside.extents.y, 0),
             Origin+inside.center + new Vector3(inside.extents.x, -inside.extents.y, 0), Color.red, 1f);*/
-        
-        
+
+
         Vector3 rand = Utils.RandomBetweenBounds(new Bounds(Vector3.zero, new Vector3(20, 20, 0)), inside);
 
         Vector3 spawnPos = Origin + rand;
@@ -228,18 +248,19 @@ public class GameManager : MonoBehaviour{
         currentCredits += s.creditCost;
         s.die();
     }
-    
+
     //story stuff:
 
     public DeviceUI dui;
     public Phase currentPhase;
 
     public float SignalTime = 120;
+
     public void GetSignal(){
         dui.AcquireSignal();
         currentPhase = Phase.followsignal;
     }
-    
+
     public void CallHeli(){
         currentPhase = Phase.waitforheli;
         dui.RemoveSignal();
@@ -247,14 +268,16 @@ public class GameManager : MonoBehaviour{
 
     public float HeliTime = 1200;
     float heliElapsed = 0;
+
     public void ArriveHeli(){
         currentPhase = Phase.followheli;
     }
 }
+
 public enum Phase{
-    prep=1,
-    waitforsignal=2,
-    followsignal=3,
-    waitforheli=4,
-    followheli=5,
+    prep = 1,
+    waitforsignal = 2,
+    followsignal = 3,
+    waitforheli = 4,
+    followheli = 5,
 }

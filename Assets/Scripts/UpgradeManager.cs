@@ -10,9 +10,6 @@ public class UpgradeManager : MonoBehaviour{
     public BulletExplodeUpgrade exp;
     public PoisonDebuffUpgrade pois;
     public KillClipUpgrade killclip;
-    public StandingUpgrade bipod;
-    public StandingUpgrade riotshield;
-    public StandingUpgrade sentry;
     public OneTapUpgrade onetap;
     public BulletsOnKillUpgrade bulletsOnKill;
     
@@ -20,9 +17,7 @@ public class UpgradeManager : MonoBehaviour{
     [Header("CustomUtilityUpgrades")]
     public BiomassUpgrade biomass;
     public TrainingUpgrade training;
-    public StandingUpgrade stockpile;
     [Header("CustomMedUpgrades")] public VampireUpgrade vamp;
-    public StandingUpgrade fungus;
 
     
     public static UpgradeManager um;
@@ -50,9 +45,6 @@ public class UpgradeManager : MonoBehaviour{
         LevelUpgradePool.Add(exp);
         LevelUpgradePool.Add(pois);
         LevelUpgradePool.Add(killclip);
-        LevelUpgradePool.Add(bipod);
-        LevelUpgradePool.Add(riotshield);
-        LevelUpgradePool.Add(sentry);
         LevelUpgradePool.Add(onetap);
         LevelUpgradePool.Add(bulletsOnKill);
         
@@ -61,12 +53,10 @@ public class UpgradeManager : MonoBehaviour{
 
         UtilityUpgradePool.Add(biomass);
         UtilityUpgradePool.Add(training);
-        UtilityUpgradePool.Add(stockpile);
 
         
         MedUpgradePool = Resources.LoadAll<UpgradeSO>("ScriptableObjects/Upgrades/Med Crate").Select(x => x.u).Where(x => x.Base).ToList();
         MedUpgradePool.Add(vamp);
-        MedUpgradePool.Add(fungus);
 
         Pools[UpgradePool.Level] = LevelUpgradePool;
         Pools[UpgradePool.Utility] = UtilityUpgradePool;
@@ -127,7 +117,7 @@ public class UpgradeManager : MonoBehaviour{
 
     public void AddUpgrade(Upgrade u){
         player.Upgrades.Add(u);
-        u.Init(player.debuffs);
+        u.Init(player);
         player.CalculateStats();
         player.Heal(u.HealOnPickup);
         if (UpgradeQueue.Count > 0){

@@ -24,12 +24,18 @@ public class Upgrade{
         Name = u.Name;
         Description = u.Description;
         Icon = u.Icon;
+        Retain = u.Retain;
+        Base = u.Base;
+        Pool = u.Pool;
+        Children = u.Children;
+        debuffs = u.debuffs;
+        
     }
     public Upgrade(){
     }
     
-    public virtual void Init(Debuffs d){
-        debuffs = d;
+    public virtual void Init(Player p){
+        debuffs = p.debuffs;
 
     }
 

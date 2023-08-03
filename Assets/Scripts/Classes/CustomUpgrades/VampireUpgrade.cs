@@ -7,8 +7,8 @@ public class VampireUpgrade : Upgrade{
 
     public float amount;
     
-    public override void Init(Debuffs d){
-        base.Init(d);
+    public override void Init(Player player){
+        base.Init(player);
         Slime.OnDeath+= Heal;
     }
 
