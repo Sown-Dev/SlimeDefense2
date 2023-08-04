@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour{
         DirectorElapsed += Time.deltaTime;
 
 
-        creditIncome = (int)(90 + (TimeElapsed / 2.6f) + difficulty * 32);
+        creditIncome = (int)(60 + (TimeElapsed / 2.6f) + difficulty * 32);
 
 
         //phase check
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour{
             }
 
             // Credit Spending:
-            if (DirectorElapsed > 0.45 / (1 + (TimeElapsed / 70))){
+            if (DirectorElapsed > 0.55 / (1 + (TimeElapsed / 70))){
                 DirectorElapsed = 0;
                 DirectorTick();
             }
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour{
     }
 
     public void DirectorTick(){
-        statsMult = (float)(TimeElapsed / 500f + 1f);
+        statsMult = (float)(TimeElapsed / 360f + 1f);
 
 
         if (CurrentHand.Count > 0){

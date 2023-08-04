@@ -16,11 +16,7 @@ public class StatsUpgradeSO: UpgradeSO{
     }
 
 
-    //on editor refresh reassign var
-    private void OnValidate(){
-        AssetDatabase.SaveAssets();
-
-    }
+    
 
 
 }

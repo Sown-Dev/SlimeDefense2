@@ -15,7 +15,7 @@ MonoBehaviour:
   Unlocked: 1
   su:
     Name: Regeneration
-    Description: <color=green>+3 Health Regeneration every 20 seconds</color>
+    Description: <color=green>+3 Health Regeneration every 10 seconds</color>
     Pool: 0
     Base: 1
     Retain: 0

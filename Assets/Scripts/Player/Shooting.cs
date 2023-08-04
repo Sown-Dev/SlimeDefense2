@@ -35,10 +35,12 @@ public class Shooting : MonoBehaviour{
     public SpriteRenderer sr;
     public Animator am;
     public Transform gun;
+    public Light2D flashlight;
     [Header("UIReferences")]
     public ReloadCircle rc;
     public Image reloadSquare;
     public TMP_Text ammoText;
+    
 
 
     private Vector3 startRot;
@@ -50,6 +52,8 @@ public class Shooting : MonoBehaviour{
 
 
     void Update(){
+        flashlight.intensity = DayNightCycle.dnc.globalLight.intensity<0.3f?0.3f:0;
+        
         if (sr.sprite != player.Weapon.sprite){
             sr.sprite = player.Weapon.sprite;
         }
@@ -98,7 +102,8 @@ public class Shooting : MonoBehaviour{
         float ang = Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg;
         //ang = Mathf.RoundToInt(ang / 10f) * 10f;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, ang) + startRot);
-        gun.localScale = new Vector3(1, (ang > 90 || ang < -90) ? -1 : 1, 1);
+        //changed from the root object to allow flashlight to not be flipped
+        sr.transform.localScale = new Vector3(1, (ang > 90 || ang < -90) ? -1 : 1, 1);
         //transform.localPosition = (Vector2.left );
 
         if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.C) ){

@@ -54,7 +54,7 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable{
                 //recycling code
                 if (target){
                     if (Vector2.Distance(transform.position, target.position) > 240 &&
-                        GameManager.gm.currentSlimes > 80){
+                        GameManager.gm.currentSlimes > 100){
                         GameManager.gm.recycle(this);
                     }
                 }
@@ -66,12 +66,12 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable{
                 //recycling code
                 if (target){
                     if (Vector2.Distance(transform.position, target.position) > 220 &&
-                        GameManager.gm.currentSlimes > 90){
+                        GameManager.gm.currentSlimes > 120){
                         GameManager.gm.recycle(this);
                     }
 
                     if (Vector2.Distance(transform.position, target.position) > 20 &&
-                        GameManager.gm.currentSlimes > 90 &&
+                        GameManager.gm.currentSlimes > 120 &&
                         id + 100 < GameManager.nextId){ //get old slimes based on id
                         GameManager.gm.recycle(this);
                     }

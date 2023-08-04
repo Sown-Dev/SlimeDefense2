@@ -99,7 +99,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         prevDebuffCount=debuffs.debuffs.Count; //triggers on add and remove status effects
         
         RegenElapsed += Time.deltaTime;
-        if(RegenElapsed>=20 && finalStats[Stats.Statstype.Regeneration]>1){
+        if(RegenElapsed>=10){
             RegenElapsed = 0;
             Heal(finalStats[Stats.Statstype.Regeneration]);
         }
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
             LevelUp();
             level++;
             currentXp -= maxXp;
-            maxXp *= 1.26f;
+            maxXp *= 1.28f;
         }
 
         xpText.text = Convert.ToInt32(currentXp) + "/" + Convert.ToInt32(maxXp);
@@ -227,9 +227,9 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
 
     public void RemoveGold(float amt){
         goldAmount -= amt;
-        if (goldAmount < 0){
+        /*if (goldAmount < 0){
             goldAmount = 0;
-        }
+        }*/
         UpdateGoldTxt();
     }
 

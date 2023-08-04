@@ -24,7 +24,7 @@ MonoBehaviour:
     st:
       stats:
       - type: 3
-        amount: 1.08
+        amount: 1.1
         operation: 1
       - type: 7
         amount: 0.9
