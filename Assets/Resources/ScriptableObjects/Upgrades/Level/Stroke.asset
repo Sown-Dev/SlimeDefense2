@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
+  m_Name: Stroke
+  m_EditorClassIdentifier: 
+  Unlocked: 1
+  su:
+    Name: Stroke
+    Description: '<color=red>Main projectiles removed</color>
+
+      <color=green>Back
+      projectiles +2
+
+      Damage +10%
+
+      </color>
+
+'
+    Pool: 0
+    Base: 1
+    Retain: 0
+    st:
+      stats:
+      - type: 5
+        amount: 0
+        operation: 1
+      - type: 1
+        amount: 1.1
+        operation: 1
+      - type: 24
+        amount: 2
+        operation: 2
+    Children: []
+    Icon: {fileID: 21300000, guid: f62ab8c342ce5c24a948f92ce0418453, type: 3}
+    debuffs:
+      parent: {fileID: 0}
+      debuffs: []
+    HealOnPickup: 0

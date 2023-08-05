@@ -15,6 +15,11 @@ public class EmptyVesselUpgrade : Upgrade{
     public void FixStats(Player p, UpgradeManager um){
         this.st = (Stats)(baseStats.Clone()) * ((p.finalStats[Stats.Statstype.MaxHealth]-p.Health)/multHealth);
     }
+    
+    public override void Remove(){
+        Player.OnUpdateStats-= FixStats;
+    }
+
 
     public EmptyVesselUpgrade(Upgrade u) : base(u){ }
 }

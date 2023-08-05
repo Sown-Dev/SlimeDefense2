@@ -20,6 +20,10 @@ public class PoisonDebuffUpgrade : Upgrade{
         }
         
     }
+    public override void Remove(){
+        Bullet.OnBulletHit -= Poison;
+        Shooting.OnSpawnBullet-= AddColor;
+    }
 
     public PoisonDebuffUpgrade(Upgrade u) : base(u){ }
 }

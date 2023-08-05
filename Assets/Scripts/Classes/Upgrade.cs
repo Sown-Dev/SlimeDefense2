@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class Upgrade{
     public string Name;
-    [TextArea(15, 20)] public string Description;
+    [TextArea(8, 10)] public string Description;
     [HideInInspector] public UpgradePool Pool;
     
     public bool Base = true; //whether or not upgrade is a base upgrade
@@ -17,7 +17,7 @@ public class Upgrade{
 
     public Sprite Icon;
 
-    [HideInInspector] public Debuffs debuffs; //reference to player debuffs
+    [HideInInspector] public Player player; //reference to player debuffs
 
     public Upgrade(Upgrade u){
         st = u.st;
@@ -28,14 +28,14 @@ public class Upgrade{
         Base = u.Base;
         Pool = u.Pool;
         Children = u.Children;
-        debuffs = u.debuffs;
+        player = u.player;
         
     }
     public Upgrade(){
     }
     
     public virtual void Init(Player p){
-        debuffs = p.debuffs;
+        player = p;
 
     }
 

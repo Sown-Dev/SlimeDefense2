@@ -16,6 +16,9 @@ public class TrainingUpgrade : Upgrade
         //give upgrade
         um.AddUpgrade(toGive);
     }
+    public override void Remove(){
+        Player.OnLevelUp -= AddUpgrade;
+    }
 
     public TrainingUpgrade(Upgrade u) : base(u){ }
 }

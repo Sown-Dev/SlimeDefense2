@@ -17,7 +17,7 @@ MonoBehaviour:
     Name: Faster Bolt
     Description: '<color=green>Attack Speed +10%
 
-      Ammo Capacity +1
+      Ammo Capacity +2
 
       </color>
 
@@ -31,7 +31,7 @@ MonoBehaviour:
         amount: 1.1
         operation: 1
       - type: 6
-        amount: 1
+        amount: 2
         operation: 2
     Children: []
     Icon: {fileID: 21300000, guid: 413321df5a259fa48829c70050c5f292, type: 3}

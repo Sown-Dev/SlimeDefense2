@@ -20,6 +20,9 @@ public class OneTapUpgrade : Upgrade{
             Debug.Log("bigbullet!");
         }
     }
+    public override void Remove(){
+        Shooting.OnSpawnBullet-= OneTap;
+    }
 
     public OneTapUpgrade(Upgrade u) : base(u){ }
 }

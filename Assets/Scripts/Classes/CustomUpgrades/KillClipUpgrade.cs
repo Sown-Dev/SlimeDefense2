@@ -12,7 +12,11 @@ public class KillClipUpgrade : Upgrade{
     }
 
     public void ApplyKillClip(Slime s){
-        debuffs.AddDebuff( new StatusEffect(seBase)); //could reset timer but i'm just gonna add the time
+        player.debuffs.AddDebuff( new StatusEffect(seBase)); //could reset timer but i'm just gonna add the time
+    }
+    
+    public override void Remove(){
+        Slime.OnDeath-= ApplyKillClip;
     }
 
     public KillClipUpgrade(Upgrade u) : base(u){ }

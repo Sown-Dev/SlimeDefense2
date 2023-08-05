@@ -16,13 +16,13 @@ MonoBehaviour:
     baseStats:
       stats:
       - type: 1
-        amount: 20
+        amount: 14
         operation: 2
       - type: 4
         amount: 3
         operation: 2
       - type: 8
-        amount: 40
+        amount: 35
         operation: 2
       - type: 6
         amount: 2
@@ -31,7 +31,7 @@ MonoBehaviour:
         amount: 0.8
         operation: 2
       - type: 5
-        amount: 7
+        amount: 6
         operation: 2
       - type: 11
         amount: 1
@@ -39,8 +39,14 @@ MonoBehaviour:
       - type: 12
         amount: 0
         operation: 2
+      - type: 24
+        amount: 0
+        operation: 2
+      - type: 15
+        amount: 40
+        operation: 2
     Auto: 1
-    Name: Pistol
+    Name: Sawed Off
     Description: 
     projectile: {fileID: 0}
-    sprite: {fileID: 21300000, guid: a4ed6c00ed122c543b8fa65004cadb05, type: 3}
+    sprite: {fileID: 21300000, guid: 5a5c600ee6736244cbaf1a93b5c2bdcd, type: 3}

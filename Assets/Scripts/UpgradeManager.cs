@@ -116,6 +116,7 @@ public class UpgradeManager : MonoBehaviour{
     }
 
     public void AddUpgrade(Upgrade u){
+        //Upgrade u = new Upgrade(upgr);
         player.Upgrades.Add(u);
         u.Init(player);
         player.CalculateStats();
@@ -123,7 +124,6 @@ public class UpgradeManager : MonoBehaviour{
         if (UpgradeQueue.Count > 0){
             upgradeUI.Open(UpgradeQueue.Dequeue());
         }
-        upgradeViewer.UpdateIcons();
 
         //removes upgrade from pool and adds its children if it has any
         if(!u.Retain)
@@ -135,6 +135,7 @@ public class UpgradeManager : MonoBehaviour{
             }
 
         }
+        upgradeViewer.UpdateIcons();
 
     }
 }

@@ -25,6 +25,10 @@ public class StatusEffectUpgrade : Upgrade
         }
         
     }
+    public override void Remove(){
+        Bullet.OnBulletHit -= Debuff;
+        Shooting.OnSpawnBullet-= AddColor;
+    }
 
     public StatusEffectUpgrade(Upgrade u) : base(u){ }
 }

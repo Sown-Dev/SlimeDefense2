@@ -15,7 +15,7 @@ MonoBehaviour:
   Unlocked: 1
   su:
     Name: Resistance
-    Description: '<color=green>Damage Resistance +20%</color>
+    Description: '<color=green>Reduced all damage by 15%</color>
 
 '
     Pool: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
     st:
       stats:
       - type: 18
-        amount: 0.8
+        amount: 0.85
         operation: 1
     Children: []
     Icon: {fileID: 21300000, guid: 7c12c4fbf8c21984b9c07db18e087684, type: 3}

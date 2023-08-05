@@ -15,23 +15,21 @@ MonoBehaviour:
   Unlocked: 1
   su:
     Name: Agility
-    Description: '<color=green>Movement Speed +10%
+    Description: '<color=green>Movement Speed +8%
 
       Reload Time -10%</color>'
     Pool: 0
     Base: 1
-    Retain: 0
+    Retain: 1
     st:
       stats:
       - type: 3
-        amount: 1.1
+        amount: 1.08
         operation: 1
       - type: 7
         amount: 0.9
         operation: 1
     Children: []
     Icon: {fileID: 21300000, guid: efce7e1e24df40c4b9095f3e28579bf0, type: 3}
-    debuffs:
-      parent: {fileID: 0}
-      debuffs: []
+    player: {fileID: 0}
     HealOnPickup: 0

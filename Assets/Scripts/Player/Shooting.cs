@@ -10,10 +10,12 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public delegate void SpawnBullet( int ammoRemaining, Player p, Bullet b); 
+public delegate void Reload( int ammoRemaining, Shooting s); 
+
 
 public class Shooting : MonoBehaviour{
     public static event SpawnBullet OnSpawnBullet;
-    
+    public static event Reload OnReload;
     
     private float elapsed;
     public int currentAmmo;
@@ -24,7 +26,10 @@ public class Shooting : MonoBehaviour{
     private bool flashbool;
 
     private float muzIntensity;
+    [HideInInspector] public float angle;
+    [HideInInspector] public Vector2 towardsMouse;
 
+    
     [Header("References")] 
     public Player player;
     public AudioSource src;
@@ -52,7 +57,11 @@ public class Shooting : MonoBehaviour{
 
 
     void Update(){
-        flashlight.intensity = DayNightCycle.dnc.globalLight.intensity<0.3f?0.3f:0;
+        if (Time.timeScale <= 0){
+            return;
+        }
+        
+        flashlight.intensity = DayNightCycle.dnc.globalLight.intensity<0.4f?0.45f:0;
         
         if (sr.sprite != player.Weapon.sprite){
             sr.sprite = player.Weapon.sprite;
@@ -99,11 +108,12 @@ public class Shooting : MonoBehaviour{
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 rot = (mousePosition - transform.position).normalized;
-        float ang = Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg;
+        towardsMouse = rot;
+        angle = Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg;
         //ang = Mathf.RoundToInt(ang / 10f) * 10f;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, ang) + startRot);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle) + startRot);
         //changed from the root object to allow flashlight to not be flipped
-        sr.transform.localScale = new Vector3(1, (ang > 90 || ang < -90) ? -1 : 1, 1);
+        sr.transform.localScale = new Vector3(1, (angle > 90 || angle < -90) ? -1 : 1, 1);
         //transform.localPosition = (Vector2.left );
 
         if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.C) ){
@@ -151,8 +161,10 @@ public class Shooting : MonoBehaviour{
             }
         }
         else{
-            float randomAngle = Random.Range(totDegrees / -2, totDegrees / 2);
-            ShootBullet(randomAngle, 0);
+            if (numProjectiles > 0){
+                float randomAngle = Random.Range(totDegrees / -2, totDegrees / 2);
+                ShootBullet(randomAngle, 0);
+            }
         }
         //back projectiles:
         
@@ -169,7 +181,7 @@ public class Shooting : MonoBehaviour{
             }
         }
         else{
-            if (numBackProjectiles > 0.5f){
+            if (numBackProjectiles >= 0.5f){
                 float randomAngle = Random.Range(totDegrees / -2, totDegrees / 2);
                 ShootBullet(randomAngle+180, 0);
             }
@@ -222,7 +234,9 @@ public class Shooting : MonoBehaviour{
             //src.PlayOneShot(equipped.reloadSound, 1f);
             reloadElapsed = 0;
             reloading = true;
+            OnReload?.Invoke(currentAmmo, this);
         }
+        
     }
 
     public void AddAmmo(int amount){

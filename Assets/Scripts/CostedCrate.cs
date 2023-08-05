@@ -11,7 +11,7 @@ public class CostedCrate : Interactable{
 
         costTXT.color = inRange ? Color.white : Color.clear;
         if (inRange && interactable){
-            costTXT.text = cost.ToString();
+            costTXT.text = "$"+ cost.ToString();
         }
     }
 

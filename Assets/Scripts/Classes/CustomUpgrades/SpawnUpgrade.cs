@@ -19,7 +19,7 @@ public class SpawnUpgrade : Upgrade{
         GameObject.Destroy(instance);
         base.Remove();
     }
-
+    
 
     public SpawnUpgrade(Upgrade u) : base(u){ }
 }

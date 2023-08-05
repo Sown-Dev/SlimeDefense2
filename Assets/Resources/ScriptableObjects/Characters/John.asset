@@ -19,7 +19,7 @@ MonoBehaviour:
         amount: 50
         operation: 2
       - type: 3
-        amount: 150
+        amount: 165
         operation: 2
       - type: 9
         amount: 1
@@ -33,4 +33,12 @@ MonoBehaviour:
       - type: 24
         amount: 0
         operation: 2
+      - type: 25
+        amount: 0.65
+        operation: 1
     name: John
+    title: The Survivor
+    perks: 
+    icon: {fileID: 21300000, guid: 2802d33d4808a63429b07022ac07303f, type: 3}
+    bgcolor: {r: 0.6509434, g: 0.42247012, b: 0.07062123, a: 1}
+  weapon: {fileID: 11400000, guid: cbc9f97919032d64db2895ae8d550624, type: 2}

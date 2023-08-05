@@ -15,7 +15,6 @@ public class Movement : MonoBehaviour{
     public Animator am;
     
     
-    public float shootingMod = 0.7f;
     public float moveSpeed = 5.5f;
     private float moveAMT;
     private Rigidbody2D rb;
@@ -44,7 +43,7 @@ public class Movement : MonoBehaviour{
             src.PlayOneShot(walk,1f );
         }
 
-        moveAMT = _shooting.shooting ? moveSpeed*shootingMod : moveSpeed;
+        moveAMT = _shooting.shooting ? moveSpeed*player.finalStats[Stats.Statstype.ShootingSpeedMultiplier] : moveSpeed;
         
         float xAmt = 0;
         float yAmt = 0;

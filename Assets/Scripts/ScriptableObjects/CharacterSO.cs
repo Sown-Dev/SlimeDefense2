@@ -4,4 +4,5 @@
 
 public class CharacterSO :ScriptableObject{
     public Character c;
+    public WeaponSO weapon;
 }

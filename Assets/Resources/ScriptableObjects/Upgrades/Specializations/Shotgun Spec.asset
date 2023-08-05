@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748dc6e5f06a4af797f1c3140d622b98, type: 3}
+  m_Name: Shotgun Spec
+  m_EditorClassIdentifier: 
+  Unlocked: 1
+  su:
+    Name: Shotgun Specialization
+    Description: '<color=green>
+
+      Projectiles+3
+
+      All projectiles multiplied
+      by 35%
+
+      Damage +3
+
+      </color>
+
+      <color=red>
+
+      Attack Speed
+      -60%
+
+      Ammo Capacity -60%
+
+      Spread +100%
+
+      Recoil +100%</color>'
+    Pool: 0
+    Base: 1
+    Retain: 0
+    st:
+      stats:
+      - type: 1
+        amount: 3
+        operation: 2
+      - type: 5
+        amount: 3
+        operation: 2
+      - type: 5
+        amount: 1.35
+        operation: 1
+      - type: 4
+        amount: 0.4
+        operation: 1
+      - type: 6
+        amount: 0.4
+        operation: 1
+      - type: 8
+        amount: 0.8
+        operation: 1
+      - type: 15
+        amount: 2
+        operation: 1
+      - type: 20
+        amount: 2
+        operation: 1
+    Children: []
+    Icon: {fileID: 0}
+    debuffs:
+      parent: {fileID: 0}
+      debuffs: []
+    HealOnPickup: 0

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour{
     public Player player;
 
     public GameObject greenSlime;
+    public DeathScreenUI deathScreenUI;
 
     [Header("Timer")] public TMP_Text taskTxt;
     public TMP_Text timerTxt;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour{
     private float creditElapsed;
     private float DirectorElapsed;
     public List<SpawnInfo> CurrentHand;
-    private float handSize = 2;
+    private float handSize = 3;
     public int difficulty = 1; //increases credit income by 5
 
     public int currentSlimes = 0;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour{
     int wavesToSkip = 0;
     [HideInInspector] public float creditMult = 1f;
     [HideInInspector] public float statsMult = 1f;
+    private int wavesNotSkipped;
 
     public void Update(){
         TimeElapsed += Time.deltaTime;
@@ -94,11 +96,17 @@ public class GameManager : MonoBehaviour{
                 creditElapsed = 0;
                 if (wavesToSkip > 0){
                     wavesToSkip--;
+                    wavesNotSkipped = 0;
                 }
                 else{
                     currentCredits += (long)(creditIncome * creditMult);
+                    wavesNotSkipped++;
                     if (Utils.Random(0.14f)){ // chance to skip a wave
-                        wavesToSkip = 1;
+                        wavesToSkip ++;
+                    }
+
+                    if (wavesNotSkipped > 10){
+                        wavesToSkip++;
                     }
                 }
             }
@@ -150,7 +158,7 @@ public class GameManager : MonoBehaviour{
     }
 
     public void DirectorTick(){
-        statsMult = (float)(TimeElapsed / 360f + 1f);
+        statsMult = (float)(TimeElapsed / 340f + 1f);
 
 
         if (CurrentHand.Count > 0){
@@ -187,6 +195,8 @@ public class GameManager : MonoBehaviour{
             for (int i = 0; i < handSize; i++){
                 CurrentHand.Add(SpawnInfoList[i]);
             }
+
+            DirectorElapsed = -0.4f; // delay for grabbing new hand
         }
     }
 
@@ -230,6 +240,7 @@ public class GameManager : MonoBehaviour{
         s.target = gm.player.transform;
         s.State = startState;
         s.maxHealth *= gm.statsMult;
+        s.damage *= (float) Math.Round(gm.statsMult,1);
         s.id = nextId++;
 
         return s;
@@ -272,12 +283,19 @@ public class GameManager : MonoBehaviour{
     public void ArriveHeli(){
         currentPhase = Phase.followheli;
     }
+
+    public void GameOver(){
+        currentPhase = Phase.dead;
+        deathScreenUI.Open((float)TimeElapsed, player.Upgrades.Count, player.Slimeskilled);
+    }
 }
 
 public enum Phase{
+    dead = -1,
     prep = 1,
     waitforsignal = 2,
     followsignal = 3,
     waitforheli = 4,
     followheli = 5,
 }
+

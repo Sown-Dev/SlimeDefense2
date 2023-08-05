@@ -15,6 +15,9 @@ public class VampireUpgrade : Upgrade{
     public void Heal(Slime s){
         Player.p.Heal(amount);
     }
+    public override void Remove(){
+        Slime.OnDeath-= Heal;
+    }
 
     public VampireUpgrade(Upgrade u) : base(u){ }
 }

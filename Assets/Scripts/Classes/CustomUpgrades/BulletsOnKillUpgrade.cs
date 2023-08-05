@@ -20,6 +20,9 @@ public class BulletsOnKillUpgrade : Upgrade{
             Player.p.s.SpawnBullet(s.transform.position, new Vector3(0,0,(rot +(i*360f/3 )) ), 0).Damage *= dmgMult;
         }
     }
-
+    public override void Remove(){
+        Slime.OnDeath-= SpawnBullets;
+    }
+    
     public BulletsOnKillUpgrade(Upgrade u) : base(u){ }
 }

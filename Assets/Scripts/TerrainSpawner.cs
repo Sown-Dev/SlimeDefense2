@@ -21,9 +21,7 @@
 
         public GameObject radioInstance;
 
-        private void OnValidate(){
-            
-        }
+        
 
         private void GenerateTiles(){
             GroundTiles = new List<Tile>();

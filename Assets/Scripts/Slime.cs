@@ -28,10 +28,15 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable{
     public float speed = 200;
     public float goldDrop = 10;
     public Color color = Color.green;
+    public float damage = 10;
 
     public StatusEffect onHitApply;
 
     [HideInInspector] public long id;
+
+    private void Awake(){
+        rb = gameObject.GetComponent<Rigidbody2D>();
+    }
 
     void Start(){
         debuffs = new Debuffs(transform);
@@ -132,16 +137,16 @@ public class Slime : MonoBehaviour, IEnemyDamagable, IStatusEffectable{
         GameObject particles = Instantiate(deathParticles, transform.position, transform.rotation);
         var m = particles.GetComponent<ParticleSystem>().main;
         m.startColor = color;
-        OnDeath?.Invoke(this);
         if (spawnOnDeath != null)
             Instantiate(spawnOnDeath, transform.position, transform.rotation);
 
         GoldManager.gm.SpawnGold(transform.position, goldDrop);
+        OnDeath?.Invoke(this);
     }
 
     private void OnCollisionEnter2D(Collision2D col){
         if (col.gameObject.GetComponent<IFriendlyDamagable>() != null){
-            col.gameObject.GetComponent<IFriendlyDamagable>().TakeDamage(10);
+            col.gameObject.GetComponent<IFriendlyDamagable>().TakeDamage(damage);
             col.rigidbody?.AddForce((col.gameObject.transform.position - transform.position).normalized *
                                     Player.p.finalStats[Stats.Statstype.KnockbackRecieved] * 400);
             rb.AddForce((col.gameObject.transform.position - transform.position).normalized * -150f);

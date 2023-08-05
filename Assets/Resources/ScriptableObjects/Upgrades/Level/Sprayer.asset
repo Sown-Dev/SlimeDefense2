@@ -18,9 +18,9 @@ MonoBehaviour:
     Description: '<color=green>Attack Speed +40%</color>
 
       <color=red>Damage
-      -15%
+      -20%
 
-      Ammo Capacity -10%</color>
+      Reload Time +10%</color>
 
 '
     Pool: 0
@@ -29,12 +29,15 @@ MonoBehaviour:
     st:
       stats:
       - type: 4
-        amount: 1.4
+        amount: 1.45
         operation: 1
       - type: 1
-        amount: 0.85
+        amount: 0.8
         operation: 1
-      - type: 6
+      - type: 7
+        amount: 1.1
+        operation: 1
+      - type: 11
         amount: 0.9
         operation: 1
     Children: []

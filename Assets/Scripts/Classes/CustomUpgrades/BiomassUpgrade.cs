@@ -21,6 +21,10 @@ public class BiomassUpgrade : Upgrade{
         }
     }
 
+    public override void Remove(){
+        Slime.OnDeath-= AddAmmo;
+    }
+
     public BiomassUpgrade(Upgrade u) : base(u){
     }
 }

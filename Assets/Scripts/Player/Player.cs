@@ -17,7 +17,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     public static event LevelUp OnLevelUp;
     public static event Update OnUpdate;
     
-    public Debuffs debuffs{ get; set; }
+    [field:SerializeField]public Debuffs debuffs{ get; set; }
     
     [Header("UI")] public Image xpBar;
     public TMP_Text xpText;
@@ -36,6 +36,8 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
 
     public float Health{ get; set; }
     public float maxHealth{ get; set; }
+
+    public int Slimeskilled = 0;
 
 
     [Header("Utils")] public LayerMask Enemies;
@@ -58,10 +60,14 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         
 
         UpdateHPUI();
-        cmvc.m_Lens.OrthographicSize = 6.8f* finalStats[Stats.Statstype.FOV];
+        cmvc.m_Lens.OrthographicSize = 7f* finalStats[Stats.Statstype.FOV];
     }
     
     void Awake(){
+        myChar = RunManager.rm.cso;
+        myWeapon = RunManager.rm.wso;
+        
+        
         debuffs = new Debuffs(transform);
         
         character = (myChar.c);
@@ -124,12 +130,13 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
     public int level;
 
     public void GainXP(Slime slime){
+        Slimeskilled++;
         currentXp+= (slime.XPGain* finalStats[Stats.Statstype.XPGain]);
         if (currentXp >= maxXp){
-            LevelUp();
             level++;
             currentXp -= maxXp;
             maxXp *= 1.28f;
+            LevelUp();
         }
 
         xpText.text = Convert.ToInt32(currentXp) + "/" + Convert.ToInt32(maxXp);
@@ -182,6 +189,11 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
 
     public void Die(){
         Destroy(gameObject);
+        GameManager.gm.currentPhase = Phase.dead;
+        GameManager.gm.GameOver();
+        foreach (Upgrade u in Upgrades){
+            u.Remove();
+        }
     }
 
     public void Heal(float amt){
