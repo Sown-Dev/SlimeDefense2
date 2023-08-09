@@ -72,6 +72,7 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         
         character = (myChar.c);
         Weapon = myWeapon.w;
+        
         Init();
         CalculateStats();
 
@@ -90,6 +91,18 @@ public class Player : MonoBehaviour, IFriendlyDamagable, IStatusEffectable
         weaponIcon.sprite = Weapon.sprite;
         UpdateGoldTxt();
 
+    }
+
+    private void OnDestroy(){
+        Slime.OnDeath -= GainXP;
+
+    }
+
+    private void Start(){
+        foreach (UpgradeSO u in character.upgrades){
+            UpgradeManager.um.AddUpgrade(u.u);
+        }
+        CalculateStats();
     }
 
 

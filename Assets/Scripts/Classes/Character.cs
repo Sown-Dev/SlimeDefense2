@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,9 +8,13 @@ public class Character: ICloneable{
     public Stats stats;
     public string name;
     public string title;
+    public List<UpgradeSO> upgrades;
+    
     [TextArea(3, 4)]public string perks;
     public Sprite icon;
     public Color bgcolor;
+    
+    
     
     public object Clone(){
         Character c = new Character();

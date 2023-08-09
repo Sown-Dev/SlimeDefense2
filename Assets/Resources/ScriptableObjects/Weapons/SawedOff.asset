@@ -45,6 +45,9 @@ MonoBehaviour:
       - type: 15
         amount: 40
         operation: 2
+      - type: 20
+        amount: 200
+        operation: 2
     Auto: 1
     Name: Sawed Off
     Description: 

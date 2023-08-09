@@ -29,7 +29,5 @@ MonoBehaviour:
     Children:
     - {fileID: 11400000, guid: 12545f658d19c304cbc93141b5188347, type: 2}
     Icon: {fileID: 21300000, guid: 0aaa348b81d8c9d4f8afeba5de8e2827, type: 3}
-    debuffs:
-      parent: {fileID: 0}
-      debuffs: []
-    HealOnPickup: 0
+    player: {fileID: 0}
+    HealOnPickup: 20

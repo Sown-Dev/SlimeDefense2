@@ -240,7 +240,7 @@ public class GameManager : MonoBehaviour{
         s.target = gm.player.transform;
         s.State = startState;
         s.maxHealth *= gm.statsMult;
-        s.damage *= (float) Math.Round(gm.statsMult,1);
+        s.damage *= (int)gm.statsMult;
         s.id = nextId++;
 
         return s;
@@ -277,11 +277,12 @@ public class GameManager : MonoBehaviour{
         dui.RemoveSignal();
     }
 
-    public float HeliTime = 1200;
+    public float HeliTime = 600;
     float heliElapsed = 0;
 
     public void ArriveHeli(){
         currentPhase = Phase.followheli;
+        Vector2 HeliPos = (Random.insideUnitCircle * 150) + (Vector2) player.transform.position;
     }
 
     public void GameOver(){

@@ -13,6 +13,7 @@
             mysr = gameObject.GetComponent<SpriteRenderer>();
             hitsr.sprite = mysr.sprite;
             hitsr.color = Color.clear;
+            hitsr.sortingOrder = mysr.sortingOrder + 1;
             Health = maxHealth;
         }
 
@@ -21,8 +22,13 @@
             Health -= dmg;
             StartCoroutine(FlashWhite());
             if (Health <= 0){
-                Destroy(gameObject);
+                Die();
             }
+        }
+
+        public void Die(){
+            Destroy(gameObject);
+            Utils.u.CreateDebris(transform.position, new Color(0.480f, 0.395f, 0.224f));
         }
 
         public void Heal(float amt){

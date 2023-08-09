@@ -7,7 +7,8 @@ public class Chunk : MonoBehaviour{
     public GameObject Crate;
     public GameObject Tree;
     public GameObject MedCrate;
-    
+    public GameObject Rock1;
+    public GameObject Rock2;
     
     public Vector2Int pos; //position in 100x100 grid. so (1,2) is the chunk at 100,200
     
@@ -36,7 +37,12 @@ public class Chunk : MonoBehaviour{
         //add trees
         for(int i= (int) Random.Range(70,100); i>0; i--){
             Vector3 randPos = new Vector3(Random.Range(-50,50),Random.Range(-50,50),0);
-            GameObject go=Instantiate(Tree, randPos + (Vector3)(Vector2)(pos * 100), Quaternion.identity);
+            GameObject go=Instantiate(Rock1, randPos + (Vector3)(Vector2)(pos * 100), Quaternion.identity);
+            go.transform.parent = transform;
+        }
+        for(int i= (int) Random.Range(60,70); i>0; i--){
+            Vector3 randPos = new Vector3(Random.Range(-50,50),Random.Range(-50,50),0);
+            GameObject go=Instantiate(Rock2, randPos + (Vector3)(Vector2)(pos * 100), Quaternion.identity);
             go.transform.parent = transform;
         }
         for(int i= (int) Random.Range(25,32); i>0; i--){

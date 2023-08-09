@@ -15,7 +15,7 @@ MonoBehaviour:
   Unlocked: 1
   su:
     Name: Flat Bullets
-    Description: '<color=green>Damage +5
+    Description: '<color=green>Damage +6
 
       </color>
 
@@ -26,11 +26,9 @@ MonoBehaviour:
     st:
       stats:
       - type: 1
-        amount: 5
+        amount: 6
         operation: 2
     Children: []
     Icon: {fileID: 21300000, guid: 0b52796cd5cbae14db1471a1e867154b, type: 3}
-    debuffs:
-      parent: {fileID: 0}
-      debuffs: []
+    player: {fileID: 0}
     HealOnPickup: 0

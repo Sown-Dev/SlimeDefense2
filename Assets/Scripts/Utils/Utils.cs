@@ -92,5 +92,20 @@ public class Utils : MonoBehaviour{
         var main= debris.GetComponent<ParticleSystem>().main;
         main.startColor = col;
     }
+
+    public static bool RayCastPoint(Vector2 Pos){
+        return RayCastPoint(Pos, Physics2D.AllLayers);
+    }
+
+    public static bool RayCastPoint(Vector2 Pos, int layerMask){
+        RaycastHit2D hit = Physics2D.Raycast(Pos, Vector2.zero, Mathf.Infinity, layerMask);
+        if (hit.collider != null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
     
 }

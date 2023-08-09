@@ -47,6 +47,8 @@ MonoBehaviour:
   Crate: {fileID: 5313777687735563111, guid: 6a2574d9cb4909b4e812c046df270cfe, type: 3}
   Tree: {fileID: 5313777687735563111, guid: 355d18c3db0868d4dbcc271202798b6b, type: 3}
   MedCrate: {fileID: 5313777687735563111, guid: bf3852d53b8195c43953dd6ec5c43c8b, type: 3}
+  Rock1: {fileID: 5313777687735563111, guid: dbe91ea184e411142ae85c634a64436a, type: 3}
+  Rock2: {fileID: 5313777687735563111, guid: 2059657499a3c4c4d8c9420432196ce3, type: 3}
   pos: {x: 0, y: 0}
   GroundTiles: []
   size: {x: 100, y: 100}
